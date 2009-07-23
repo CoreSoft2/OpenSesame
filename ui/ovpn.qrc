@@ -1,0 +1,11 @@
+<RCC>
+  <qresource>
+    <file>resources/connect.png</file>
+    <file>resources/delete.png</file>
+    <file>resources/disconnect.png</file>
+    <file>resources/new.png</file>
+    <file>resources/openvpn-client.png</file>
+    <file>resources/properties.png</file>
+    <file>resources/log.png</file>
+  </qresource>
+</RCC>

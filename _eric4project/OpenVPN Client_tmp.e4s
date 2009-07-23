@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE Session SYSTEM "Session-4.3.dtd">
+<!-- eric4 session file for project OpenVPN Client_tmp -->
+<!-- This file was generated automatically, do not edit. -->
+<!-- Saved: 2009-07-20, 17:05:55 -->
+<Session version="4.3">
+  <Filenames>
+    <Filename cline="0" cindex="0" folds="">C:\Users\rob\projects\ovpnclient\trunk\openvpnclient.pyw</Filename>
+  </Filenames>
+  <ActiveWindow cline="0" cindex="0">C:\Users\rob\projects\ovpnclient\trunk\openvpnclient.pyw</ActiveWindow>
+  <Breakpoints>
+  </Breakpoints>
+  <Watchexpressions>
+  </Watchexpressions>
+  <DebugInfo>
+    <CommandLine></CommandLine>
+    <WorkingDirectory></WorkingDirectory>
+    <Environment></Environment>
+    <ReportExceptions value="True" />
+    <Exceptions>
+    </Exceptions>
+    <IgnoredExceptions>
+    </IgnoredExceptions>
+    <AutoClearShell value="True" />
+    <TracePython value="False" />
+    <AutoContinue value="True" />
+    <CovexcPattern></CovexcPattern>
+  </DebugInfo>
+  <Bookmarks>
+  </Bookmarks>
+</Session>
