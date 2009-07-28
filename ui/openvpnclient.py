@@ -359,7 +359,7 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         QtGui.QMessageBox.aboutQt(None, 
             self.trUtf8("About Qt..."))
     
-    @pyqtSignature("")
+    @QtCore.pyqtSignature("")
     def on_actionImport_triggered(self):
         """
         Slot documentation goes here.
@@ -367,7 +367,7 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         # TODO: not implemented yet
         exception.MsgBox("Not implemented.")
     
-    @pyqtSignature("")
+    @QtCore.pyqtSignature("")
     def on_actionExport_triggered(self):
         """
         Slot documentation goes here.

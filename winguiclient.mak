@@ -2,11 +2,7 @@
 # Makefile to build the gui client
 # This file is meant to run on Windows though mingw32, this the funky filenames
 
-PYTHON=/c/Python26/python.exe
-PYINSTALLER=/c/users/rob/apps/pyinstaller/Build.py
-
-GUITARGET=dist/OpenVPNClient.exe
-TAPTARGET=dist/tapinstaller.exe
+include ../vars.mak
 
 OVPNLIB=OVPN/__init__.py \
     OVPN/clientmgr.py \
@@ -27,20 +23,22 @@ UI=ui/__init__.py \
     ui/privkeyentry.py \
     ui/Ui_privkeyentry.py \
     ui/properties.py \
-    ui/Ui_properties.py
+    ui/Ui_properties.py \
+	ui/customfieldtable.py
 
 TAPFILES=installer/tapinstaller.py installer/installedfiles/tapinstaller.exe.manifest installer/tapinstaller-versioninfo.txt
-GUIFILES=openvpnclient.pyw $(OVPNLIB) $(UI)
+GUIFILES=openvpnclient.py $(OVPNLIB) $(UI)
 
-$(GUITARGET): $(GUIFILES) installer/gui-versioninfo.txt installer/installedfiles/openvpnclient.exe.manifest
-	$(PYTHON) $(PYINSTALLER) installer/openvpnclient.spec
+$(GUITARGET): $(GUIFILES) installer/gui-versioninfo.txt installer/installedfiles/jfx\ openvpnclient.exe.manifest
+	export GUIDIR=$(GUIDIR) && $(PYTHON) $(PYINSTALLER) installer/openvpnclient.spec
 
 
 # I suppose the tapinstall target should be moved to its own spec file    
 $(TAPTARGET): $(TAPFILES)
-	$(PYTHON) $(PYINSTALLER) installer/openvpnclient.spec
+	export GUIDIR=$(GUIDIR) && $(PYTHON) $(PYINSTALLER) installer/openvpnclient.spec
 
 clean:
-	rm -rf installer/build installer/dist installer/tapinstaller.exe installer/OpenVPNClient.exe installer/warnpyinstaller.txt installer/warnopenvpnclient.txt *log
+	rm -rf installer/build installer/dist installer/tapinstaller.exe installer/JFX\ OpenVPNClient.exe installer/warnpyinstaller.txt installer/warnopenvpnclient.txt *log
 
-all: $(GUITARGET) $(TAPTARGET)
+all: $(GUITARGET)
+#$(TAPTARGET)

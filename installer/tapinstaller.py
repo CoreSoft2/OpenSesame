@@ -42,12 +42,12 @@ if action not in ['install',  'remove', 'list']:
     parser.error("invalid action %s" % action)
 
 TAPDIR = '%s/tapinstall/%s' % (options.installdir, ARCH)
-OVPNCLIENT = '%s/OpenVPNClient.exe' % options.installdir
+OVPNCLIENT = '%s/JFX OpenVPNClient.exe' % options.installdir
 
 if os.path.isfile(OVPNCLIENT):
     FOUNDCLIENT = True
 else:
-    print "Error: Installdir doesn't look right. No OpenVPNClient.exe"
+    print "Error: Installdir doesn't look right. No 'JFX OpenVPNClient.exe'"
     sys.exit(1)
     
 if os.path.isdir(TAPDIR):
