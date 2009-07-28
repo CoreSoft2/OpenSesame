@@ -3,7 +3,7 @@
 import os
 
 SOURCEDIR = os.environ['GUIDIR']
-CRTHOME = 'C:/Users/rob/projects/msvcr90_30729.4918'
+CRTHOME = 'C:/Users/rob/projects/msvcr90_21022.8'
 PYQTHOME = 'C:/Python26/Lib/site-packages/PyQt4'
 PYINSTALLER = 'C:/Users/rob/apps/pyinstaller'
 
@@ -11,12 +11,12 @@ PYINSTALLER = 'C:/Users/rob/apps/pyinstaller'
 
 # Process the includes and excludes first
 
-data_files = [('Microsoft.VC90.CRT.manifest', '%s/x86_microsoft.vc90.crt_1fc8b3b9a1e18e3b_9.0.30729.4918_none_508da958bcbd2845.manifest' % CRTHOME,
-              'DATA'), ('jfx openvpnclient.exe.manifest', '%s/installer/installedfiles/jfx openvpnclient.exe.manifest' % SOURCEDIR,
-              'DATA'), ('tapinstaller.exe.manifest', '%s/installer/installedfiles/tapinstaller.exe.manifest' % SOURCEDIR,
-              'DATA'), ('README.TXT', '%s/README.TXT' % SOURCEDIR, 'DATA'),
-		('license.txt', '%s/license.txt' % SOURCEDIR, 'DATA'), 
-		('openvpn-client.ico', '%s/ui/resources/openvpn-client.ico' % SOURCEDIR, 'DATA')]
+data_files = [('Microsoft.VC90.CRT.manifest', '%s/Microsoft.VC90.CRT.manifest' % CRTHOME, 'BINARY'),
+            ('JFX OpenVPNClient.exe.manifest', '%s/installer/installedfiles/jfx openvpnclient.exe.manifest' % SOURCEDIR, 'BINARY'),
+            ('tapinstaller.exe.manifest', '%s/installer/installedfiles/tapinstaller.exe.manifest' % SOURCEDIR, 'BINARY'),
+            ('README.TXT', '%s/README.TXT' % SOURCEDIR, 'DATA'),
+            ('license.txt', '%s/license.txt' % SOURCEDIR, 'DATA'), 
+            ('openvpn-client.ico', '%s/ui/resources/openvpn-client.ico' % SOURCEDIR, 'DATA')]
 
 includes = []
 excludes = ['_gtkagg', '_tkagg', 'bsddb', 'curses', 'email', 'pywin.debugger',
