@@ -37,7 +37,7 @@ class AppSettings(QtGui.QDialog, Ui_AppSettings):
         """
         options = QtGui.QFileDialog.Options()
         selectedFilter = QtCore.QString()
-        if self.parent.config.platform == 'win32':
+        if self._parent.config.platform == 'win32':
             fileName = QtGui.QFileDialog.getOpenFileName(self,
                     self.tr("Find openvpn.exe ..."),
                     self.lineEditOpenVPNEXE.text(),

@@ -12,15 +12,17 @@ import sys
 import time
 from hashlib import md5
 import shutil
+import zipfile
+import tempfile
 
 from PyQt4.QtCore import QSettings
 
-from exception import ConfigErrorMsg, QuestionMsgBox
+from exception import ConfigErrorMsg, QuestionMsgBox, YesNoMsgBox
 
 APPNAME = 'OpenVPN Client'
 VERSION = 'trunk'
 
-DEFAULTS = { 'exelocation':  "C:/Program Files/JFX/OpenVPN Client/bin/openvpn.exe",
+DEFAULTS = { 'exelocation':  "C:/Program Files/JFX/OpenVPN Client/openvpn.exe",
                     'windeffileloc':  "C:/Program Files/OpenVPN/config",
                         'linuxbinary':  "/usr/bin/openvpn", 
                         'linuxdeffileloc': "/home",
@@ -29,6 +31,8 @@ DEFAULTS = { 'exelocation':  "C:/Program Files/JFX/OpenVPN Client/bin/openvpn.ex
                     }
 
 DEFAULTPORT = '1194'
+
+EXPORTFILES = [ 'config.ovpn',  'client.crt', 'client.key', 'ca.crt', 'ta.key' ]
 
 settings = QSettings(QSettings.IniFormat, QSettings.UserScope, "JFX", APPNAME)
 settings.setDefaultFormat(QSettings.IniFormat)
@@ -131,9 +135,9 @@ class ConfigDesc:
         newpath = os.path.normpath(os.path.join(iniPath, value))
         if os.path.isfile(newpath):
             return True
-        name = str(self._parent.getname())
+        dirname, name = self._parent.getdir_file()
         if name is not None:
-            newpath = os.path.normpath(os.path.join(iniPath, name, value))
+            newpath = os.path.normpath(os.path.join(iniPath, dirname, value))
             if os.path.isfile(newpath):
                     return True
         return False
@@ -295,7 +299,8 @@ class OVConfig:
     
     def getdir_file(self):
         name = str(self._name)
-        configdir = os.path.normpath(os.path.join(iniPath, name))
+        configfolder = name + '.jfx'
+        configdir = os.path.normpath(os.path.join(iniPath, configfolder))
         configfile = os.path.normpath(os.path.join(configdir, 'config.ovpn'))
         return (configdir, configfile)
     
@@ -303,7 +308,7 @@ class OVConfig:
         return self._desc.gethidden()
     
     def getUsedCFs(self):
-        return self.usedCFs
+        return self._usedCFs
     
     def loadconfig(self):
         # load a config file and check syntax while we're at it... 
@@ -339,9 +344,11 @@ class OVConfig:
             self._loaded = True
             self._saved = True
             return True
+        else:
+            return False
         
     def checkconfigsyntax(self, config):
-        allowedCFs = self._desc.getAllowedCFs()
+        allowedCFs = self._desc.getallowedCFs()
         for key in config.keys():
             # WTF does this do? It looks like its checking for a screwed up
             # multidict?
@@ -467,4 +474,93 @@ Are you sure you want to do this?"""
         if reply:
             self._deleteforreal()
             settings.remove('connections/%s' % self._name)
+            
+    def export(self, exportfile):
+        """Export a config to a portable format. Useful for transferring connection
+        data to another machine.
+        
+        The export format is similar to Viscosity. The exported file is a ZIP file that
+        contains a single directory, <Connection Name>.jfx. Inside is the config file,
+        named config.ovpn along with the certificate files.
+        
+        It should be trivial for sysadmins to create their own configs customized for
+        their users."""
+
+        exportfile = str(exportfile)
+        exbase = os.path.basename(exportfile)
+        if exbase.find('.') < 0:
+            exportfile = exportfile + '.ovpnz'
+        
+        zf = zipfile.ZipFile(exportfile, 'w', zipfile.ZIP_DEFLATED)
+        dirname, filename = self.getdir_file()
+        
+        dirbase = os.path.basename(dirname)
+        for file in EXPORTFILES:
+            filepath = os.path.join(dirname, file)
+            if os.path.isfile(filepath):
+                arcname = os.path.join(dirbase, file)
+                zf.write(filepath, arcname)
+        
+        zf.close()
+    
+    def importconf(self, importfile):
+        """Import a config from an exported one. See notes above for the format."""
+        
+        if not os.path.isfile(importfile) or not zipfile.is_zipfile(importfile):
+            return (None, "Not an exported config file.")
+        
+        zf=zipfile.ZipFile(importfile, "r")
+        
+        filelist =zf.namelist()
+        onedir = ''
+        for file in filelist:
+            try:
+                (directory, filename) = file.split('/', 1)
+            except:
+                return (None, "Not an exported config file.")
+            if directory[-4:] != '.jfx':
+                return (None, "Not an exported config file.")
+            elif onedir != '' and directory != onedir:
+                return (None, "Not an exported config file.")
+            else:
+                onedir = directory
+            if filename not in EXPORTFILES:
+                return (None, "Not an exported config file.")
+        
+        # If we got this far, the filenames look good...
+        
+        td = tempfile.mkdtemp()
+        zf.extractall(td)
+        zf.close()
+        
+        name = onedir[:-4]
+        src = os.path.join(td, onedir)
+        dst = os.path.join(iniPath, onedir)
+        saveold = None
+        if os.path.exists(dst):
+            msg = """The configuration %s already exists,
+do you want to overwrite it?"""
+            reply = YesNoMsgBox(msg % name)
+            if reply:
+                td2 = tempfile.mkdtemp()
+                saveold = os.path.join(td2, onedir)
+                shutil.move(dst, saveold)
+            else:
+                shutil.rmtree(td)
+                return False
+        
+        shutil.move(src, dst)
+        self._name = name
+        if not self.loadconfig():
+            shutil.rmtree(dst)
+            if saveold:
+                shutil.move(saveold, dst)
+                shutil.rmtree(td2)
+                shutil.rmtree(td)
+            return False
+        shutil.rmtree(td)
+        return True
+        
+        
+        
         

@@ -46,6 +46,17 @@ def QuestionMsgBox(msg):
         return True
     else:
         return False
+        
+def YesNoMsgBox(msg):
+    message = str(msg)
+    reply = QMessageBox.question(None,
+        "Question...",
+        message,
+        QMessageBox.Yes|QMessageBox.No)
+    if reply == QMessageBox.Yes:
+        return True
+    else:
+        return False
 
 def CriticalError(error):
     message = str(error)

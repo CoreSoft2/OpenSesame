@@ -14,6 +14,9 @@ class ConnectionTable(QTableWidget):
         self.configs = {}
         self.map = {}
     
+    def getConfigNames(self):
+        return self.map.keys()
+    
     def setState(self, name, state):
         name=str(name)
         row = self.map[name]
@@ -56,6 +59,8 @@ class ConnectionTable(QTableWidget):
     
     def removeRow(self, key):
         if self.configs.has_key(key):
+            name = self.configs[key].getname()
+            del self.map[name]
             del self.configs[key]
         
         QTableWidget.removeRow(self, key)

@@ -340,7 +340,8 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         double-click on a connection row
         """
         row = index.row()
-        self.doProperties(row)
+        if row >= 0:
+            self.doProperties(row)
     
     @QtCore.pyqtSignature("")
     def on_actionForget_Password_triggered(self):
@@ -362,15 +363,47 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
     @QtCore.pyqtSignature("")
     def on_actionImport_triggered(self):
         """
-        Slot documentation goes here.
+        Import a config.
         """
-        # TODO: not implemented yet
-        exception.MsgBox("Not implemented.")
+        options = QtGui.QFileDialog.Options()
+        selectedFilter = QtCore.QString()
+        homeDir = QtCore.QDir.homePath()
+        fileName = QtGui.QFileDialog.getOpenFileName(self,
+                self.tr("Import VPN Configuration"),
+                homeDir,
+                self.tr("VPN Config Exports (*.ovpnz);;All Files (*)"), selectedFilter,
+                options)
+        if not fileName.isEmpty():
+            fileName = str(fileName)
+            ovconfig = config.OVConfig()
+            if ovconfig.importconf(fileName):
+                name = ovconfig.getname()
+                if name not in self.tableConnections.getConfigNames():
+                    self.addconnection(ovconfig)
+                settingkey = 'connections/%s' % name
+                dirname, filename = ovconfig.getdir_file()
+                self.settings.setValue(settingkey, QtCore.QVariant(filename))
+                
+        
+        
     
     @QtCore.pyqtSignature("")
     def on_actionExport_triggered(self):
         """
-        Slot documentation goes here.
+        Export a config file for transfer to another computer.
         """
-        # TODO: not implemented yet
-        exception.MsgBox("Not implemented.")
+        key = self.tableConnections.currentRow()
+        if key >= 0:
+            ovconfig = self.tableConnections.configs[key]
+            
+            options = QtGui.QFileDialog.Options()
+            selectedFilter = QtCore.QString()
+            homeDir = QtCore.QDir.homePath()
+            fileName = QtGui.QFileDialog.getSaveFileName(self,
+                self.tr("Export VPN Configuration"),
+                homeDir,
+                self.tr("VPN Config Exports (*.ovpnz);;All Files (*)"), selectedFilter,
+                options)
+            if not fileName.isEmpty():
+                ovconfig.export(fileName)
+            
