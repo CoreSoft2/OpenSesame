@@ -44,3 +44,4 @@ class PrivKeyEntry(QDialog, Ui_PrivKeyEntry):
         """
         QDialog.__init__(self, parent)
         self.setupUi(self)
+        self.lineEditPrivKey.setFocus()

@@ -18,6 +18,7 @@ import tempfile
 from PyQt4.QtCore import QSettings
 
 from exception import ConfigErrorMsg, QuestionMsgBox, YesNoMsgBox
+from customfields import ALLOWEDCFS
 
 APPNAME = 'OpenVPN Client'
 VERSION = 'trunk'
@@ -103,7 +104,7 @@ class ConfigDesc:
     
         self._syntaxes = opts
         #TODO: Fill in the allowed customfields
-        self._allowedCFs = []
+        self._allowedCFs = ALLOWEDCFS
     
     def _hostport(self, value):
         try:
@@ -362,7 +363,7 @@ class OVConfig:
                             # Need to keep track of what custom fields we have so
                             # when we load the Properties GUI we don't have to parse
                             # again
-                            self.usedCFs.append(key)
+                            self._usedCFs.append(key)
                         continue
                     else:
                         ConfigErrorMsg('Bad value %s for key %s' % (config[key][0], key))
@@ -379,7 +380,7 @@ class OVConfig:
                         if self._desc.checksyntax(key, value):
                             if key in allowedCFs:
                                 # Again, keep track of custom fields
-                                self.usedCFs.append(key)
+                                self._usedCFs.append(key)
                             continue
                         else:
                             ConfigErrorMsg('Bad value %s for key %s' % (config[key][0], key))
@@ -415,7 +416,7 @@ class OVConfig:
                 newfile, dir = newfile.rsplit(' ',1)
             newfile = os.path.normpath(str(newfile))
             if newfile == os.path.basename(newfile):
-                newfile = os.path.join(iniPath, str(self._name), newfile)
+                newfile = os.path.join(iniPath, str(self._name) + '.jfx', newfile)
             bn = fndict[key]
             dirname, filename = self.getdir_file()
             oldfile = os.path.join(dirname, bn)

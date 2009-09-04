@@ -70,13 +70,15 @@ limitations/bugs that probably need to be addressed before 1.0-Release...
     fault. That may be a bit harsh for the average Windows user... I probably need
     to make some effort to at least find out what custom field is messing up 
     OpenVPN, if that's even doable. There's a TODO item someplace for this.
-  - I wrote custom field support while on a plane with no ability to test my code...
-    long story, suffice to say I really fucked up my laptop right before this flight
-    so things like pyuic4 don't work...
+
 
 TODO:
 In no particular order --
   - Fill out the tray icon menu: add entries for all of the connections, and a submenu for
     those to connect/disconnect/edit properties. 
   - Maybe support connecting to multiple servers at once. Not a high priority.
-  - Test and clean up custom field support
+  - Test and clean up custom field support -- seems to work... 9/3/09
+  - support auth plugins clientside (username/password dialog)
+  - Keep an eye on PySide, maybe switch to that
+  - support different certificate configurations... like shared-key setups... pkcs11...
+  - add field to display to show VPN IP when connected

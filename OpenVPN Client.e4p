@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project OpenVPN Client -->
-<!-- Saved: 2009-07-28, 12:54:38 -->
+<!-- Saved: 2009-08-23, 19:18:29 -->
 <!-- Copyright (C) 2009 Rob Lemley, rob@calypsoblue.org -->
 <Project version="4.6">
   <Language>en</Language>
@@ -41,6 +41,7 @@
     <Source>README.TXT</Source>
     <Source>installer/installedfiles/jfx openvpnclient.exe.manifest</Source>
     <Source>installer/installedfiles/tapinstaller.exe.manifest</Source>
+    <Source>OVPN/customfields.py</Source>
   </Sources>
   <Forms>
     <Form>ui/openvpnclient.ui</Form>

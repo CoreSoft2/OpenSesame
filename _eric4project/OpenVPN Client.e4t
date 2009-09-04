@@ -1,42 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project OpenVPN Client -->
-<!-- Saved: 2009-08-05, 08:17:55 -->
+<!-- Saved: 2009-09-03, 22:34:03 -->
 <Tasks version="4.2">
-  <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO:</Summary>
-    <Description></Description>
-    <Created>2009-07-20, 18:27:17</Created>
-    <Resource>
-      <Filename>README.TXT</Filename>
-      <Linenumber>77</Linenumber>
-    </Resource>
-  </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Fill in the allowed customfields</Summary>
     <Description></Description>
-    <Created>2009-08-05, 07:57:53</Created>
+    <Created>2009-09-03, 22:29:33</Created>
     <Resource>
       <Filename>OVPN/config.py</Filename>
-      <Linenumber>105</Linenumber>
+      <Linenumber>106</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Fix the laziness here... should really specify somewhere WHAT</Summary>
     <Description></Description>
-    <Created>2009-08-05, 07:57:53</Created>
+    <Created>2009-09-03, 22:29:33</Created>
     <Resource>
       <Filename>OVPN/config.py</Filename>
-      <Linenumber>372</Linenumber>
+      <Linenumber>373</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: What does OpenVPN do when you send it a bad config option?</Summary>
     <Description></Description>
-    <Created>2009-08-05, 07:57:53</Created>
+    <Created>2009-09-03, 22:29:33</Created>
     <Resource>
       <Filename>OVPN/config.py</Filename>
-      <Linenumber>375</Linenumber>
+      <Linenumber>376</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO:</Summary>
+    <Description></Description>
+    <Created>2009-09-03, 22:33:45</Created>
+    <Resource>
+      <Filename>README.TXT</Filename>
+      <Linenumber>75</Linenumber>
     </Resource>
   </Task>
 </Tasks>

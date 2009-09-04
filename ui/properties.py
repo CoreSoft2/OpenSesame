@@ -135,7 +135,7 @@ class Properties(QtGui.QDialog, Ui_Properties):
             self._config.append('comp-lzo')
         # Custom field support
         for (field, value) in self.tableCustomFields.getCustomFields():
-            self._config.append(field, value)
+            self._config.append(str(field), str(value))
     
     @QtCore.pyqtSlot()
     def checkconfig(self):

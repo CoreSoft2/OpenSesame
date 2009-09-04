@@ -28,7 +28,7 @@ class CustomFieldTable(QTableWidget):
     def getCustomFields(self):
         rc = self.rowCount()
         for i in range(0,rc):
-            field = self.getItem(i, 0).text()
-            value = self.getItem(i, 1).text()
+            field = self.takeItem(i, 0).text()
+            value = self.takeItem(i, 1).text()
             yield (field, value)
     
