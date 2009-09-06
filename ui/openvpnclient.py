@@ -1,7 +1,7 @@
 # ui/openvpnclient.py
-# JFX OpenVPN Client
+# OpenSesame
 
-# This file is part of the JFX OpenVPN Client GUI. 
+# This file is part of OpenSesame. 
 # Copyright (C) 2009 by Rob Lemley.
 # See the README.TXT file for important information about this project.
 
@@ -179,7 +179,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         """
         self._exiting = True
         if self.manager and self.manager.numConnections() > 0:
-            rv = exception.QuestionMsgBox("Do you want to exit the VPN Client? This will close all open connections.")
+            rv = exception.QuestionMsgBox("Do you want to exit OpenSesame? This will close all open connections.")
         else:
             rv = True
         if rv:
@@ -308,10 +308,10 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         Call about dialog
         """
         QtGui.QMessageBox.about(None,
-            self.trUtf8("About OpenVPN Client - Version %s" % config.VERSION),
+            self.trUtf8("About OpenSesame - Version %s" % config.VERSION),
             self.trUtf8("""Copyright (C) 2009 by Rob Lemley
 
-This GUI client is distributed under the terms of the GPL license version 3. See license.txt for the full license.
+OpenSesame is distributed under the terms of the GPL license version 3. See license.txt for the full license.
 
 For license terms for OpenVPN and its components, see openvpn-license.txt."""))
 

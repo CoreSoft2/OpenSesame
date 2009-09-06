@@ -3,20 +3,18 @@
 import os
 
 SOURCEDIR = os.environ['GUIDIR']
-CRTHOME = 'C:/Users/rob/projects/msvcr90_21022.8'
-PYQTHOME = 'C:/Python26/Lib/site-packages/PyQt4'
-PYINSTALLER = 'C:/Users/rob/apps/pyinstaller'
+QTDIR = 'C:/qt/4.5.2/bin'
+PYINSTALLER = 'C:/apps/pyinstaller'
 
 
 
 # Process the includes and excludes first
 
-data_files = [('Microsoft.VC90.CRT.manifest', '%s/Microsoft.VC90.CRT.manifest' % CRTHOME, 'BINARY'),
-            ('JFX OpenVPNClient.exe.manifest', '%s/installer/installedfiles/jfx openvpnclient.exe.manifest' % SOURCEDIR, 'BINARY'),
-            ('tapinstaller.exe.manifest', '%s/installer/installedfiles/tapinstaller.exe.manifest' % SOURCEDIR, 'BINARY'),
+data_files = [
             ('README.TXT', '%s/README.TXT' % SOURCEDIR, 'DATA'),
             ('license.txt', '%s/license.txt' % SOURCEDIR, 'DATA'), 
-            ('openvpn-client.ico', '%s/ui/resources/openvpn-client.ico' % SOURCEDIR, 'DATA')]
+            ('openvpn-client.ico', '%s/ui/resources/openvpn-client.ico' % SOURCEDIR, 'DATA')
+            ]
 
 includes = []
 excludes = ['_gtkagg', '_tkagg', 'bsddb', 'curses', 'email', 'pywin.debugger',
@@ -24,11 +22,9 @@ excludes = ['_gtkagg', '_tkagg', 'bsddb', 'curses', 'email', 'pywin.debugger',
             'Tkconstants', 'Tkinter']
 packages = []
 dll_excludes = []
-dll_includes = [('QtCore4.dll', '%s/QtCore4.dll' % PYQTHOME,
-                'BINARY'), ('QtGui4.dll', '%s/QtGui4.dll' % PYQTHOME,
-                'BINARY'), ('QtNetwork4.dll', '%s/QtNetwork4.dll' % PYQTHOME,
-                'BINARY'), ('msvcp90.dll', '%s/msvcp90.dll' % CRTHOME,
-                'BINARY'), ('msvcr90.dll', '%s/msvcr90.dll' % CRTHOME,
+dll_includes = [('QtCore4.dll', '%s/QtCore4.dll' % QTDIR,
+                'BINARY'), ('QtGui4.dll', '%s/QtGui4.dll' % QTDIR,
+                'BINARY'), ('QtNetwork4.dll', '%s/QtNetwork4.dll' % QTDIR,
                 'BINARY')]
 
 # Set up the more obscure PyInstaller runtime options
@@ -58,7 +54,7 @@ tappyz = PYZ(tapanalysis.pure, level=9)
 guiexecutable = EXE(guipyz,
                  guianalysis.scripts + includes + packages + options,
                  exclude_binaries=1,
-                 name="JFX OpenVPNClient.exe",
+                 name="OpenSesame.exe",
                  debug=False,
                  console=False,
                  strip=False,

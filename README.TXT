@@ -1,21 +1,22 @@
-README.TXT  - 2009-07-17
+README.TXT  - 2009-09-05
 
-This is the JFX OpenVPN Client GUI. 
+This is OpenSesame. 
 
-As of this writing, the code is somewhere between what I've called
-1.0-alpha2 and what will be 1.0-beta1. 
+I'm calling this release Beta-0, 0.9.0
+Beta-1 will be 0.9.1, etc.
 
-This README only refers to the GUI, which was written by Rob Lemley.
+
+This README only refers OpenSesame, which was written by Rob Lemley.
 I have tried to identify any files that I am responsible for with some 
 sort of header.
 
 If you're downloading the "source" package, then everything in this
 tarball I wrote. If this file is part of a Windows installer or a Mac
-Application, then see the README file for that. There's a bunch of
+Application (vaporware), then see the README file for that. There's a bunch of
 stuff in those downloads that I did not write, and I want to make sure
 that the authors of those softwares are given credit where it is due.
 
-This GUI was written because I do not care for the GUI for Windows
+OpenSesame was written because I do not care for the GUI for Windows
 that comes with OpenVPN. My employer uses OpenVPN extensively
 for various purposes. Most of our employees use the VPN to work
 remotely. For the Mac users, there's a wonderful application called
@@ -36,10 +37,10 @@ What I'm setting out to fix:
     away
   - Something Viscosity doesn't have that I want... the ability to change your
     certificate passphrase. The Windows GUI from openvpn.net has this... I
-    definitely don't want to lose any functionality
+    definitely don't want to lose any functionality (not implemented)
   - The ability to import existing configs that may be in place from a normal
     OpenVPN installation. Bonus points to import Viscosity configs. It would make
-    my day if I can use the same config for all of my clients.
+    my day if I can use the same config for all of my clients. (sorta...)
     
 As of this writing, this thing definitely works on Windows. So far so good on
 Linux. It probably needs some work to be usable on Mac. My main target is
@@ -56,7 +57,7 @@ Here's the general idea --
   - Once connected, use the VPN as usual. To disconnect, press the "Disconnect" button.
   
 CUSTOM FIELD SUPPORT:
-There is some custom field support in this version. (1.0-beta1) There are a few
+There is some custom field support in this version. (0.9.0) There are a few
 limitations/bugs that probably need to be addressed before 1.0-Release...
   - Custom fields need to be "supported". Currently, this is a list defined in the
     depths of config.py. As of this writing, that list is empty... so custom fields
@@ -74,11 +75,12 @@ limitations/bugs that probably need to be addressed before 1.0-Release...
 
 TODO:
 In no particular order --
+  - Ability to change SSL key passphrases... This is a royal PITA...
   - Fill out the tray icon menu: add entries for all of the connections, and a submenu for
     those to connect/disconnect/edit properties. 
   - Maybe support connecting to multiple servers at once. Not a high priority.
   - Test and clean up custom field support -- seems to work... 9/3/09
   - support auth plugins clientside (username/password dialog)
-  - Keep an eye on PySide, maybe switch to that
+  - Keep an eye on PySide, maybe switch to that -- it doesn't work on Windows yet :(
   - support different certificate configurations... like shared-key setups... pkcs11...
   - add field to display to show VPN IP when connected

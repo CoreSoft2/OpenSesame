@@ -1,6 +1,6 @@
 # guiclient.mak
 # Makefile to build the gui client
-# This file is meant to run on Windows though mingw32, this the funky filenames
+# This file is meant to run on Windows though mingw32, thus the funky filenames
 
 include ../vars.mak
 
@@ -26,19 +26,19 @@ UI=ui/__init__.py \
     ui/Ui_properties.py \
 	ui/customfieldtable.py
 
-TAPFILES=installer/tapinstaller.py installer/installedfiles/tapinstaller.exe.manifest installer/tapinstaller-versioninfo.txt
-GUIFILES=openvpnclient.py $(OVPNLIB) $(UI)
+TAPFILES=installer/tapinstaller.py installer/tapinstaller-versioninfo.txt
+GUIFILES=opensesame.py $(OVPNLIB) $(UI)
 
-$(GUITARGET): $(GUIFILES) installer/gui-versioninfo.txt installer/installedfiles/jfx\ openvpnclient.exe.manifest
-	export GUIDIR=$(GUIDIR) && $(PYTHON) $(PYINSTALLER) installer/openvpnclient.spec
+$(GUITARGET): $(GUIFILES) installer/gui-versioninfo.txt
+	export GUIDIR=$(GUIDIR) && $(PYTHON) $(PYINSTALLER) installer/opensesame.spec
 
 
 # I suppose the tapinstall target should be moved to its own spec file    
 $(TAPTARGET): $(TAPFILES)
-	export GUIDIR=$(GUIDIR) && $(PYTHON) $(PYINSTALLER) installer/openvpnclient.spec
+	export GUIDIR=$(GUIDIR) && $(PYTHON) $(PYINSTALLER) installer/opensesame.spec
 
 clean:
-	rm -rf installer/build installer/dist installer/tapinstaller.exe installer/JFX\ OpenVPNClient.exe installer/warnpyinstaller.txt installer/warnopenvpnclient.txt *log
+	rm -rf installer/build installer/dist installer/tapinstaller.exe installer/OpenSesame.exe installer/warnpyinstaller.txt installer/warnopenvpnclient.txt *log
 
 all: $(GUITARGET)
 #$(TAPTARGET)

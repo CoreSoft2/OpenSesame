@@ -1,7 +1,7 @@
 # OVPN/config.py
-# JFX OpenVPN Client
+# OpenSesame
 
-# This file is part of the JFX OpenVPN Client GUI. 
+# This file is part of OpenSesame. 
 # Copyright (C) 2009 by Rob Lemley.
 # See the README.TXT file for important information about this project.
 
@@ -20,10 +20,10 @@ from PyQt4.QtCore import QSettings
 from exception import ConfigErrorMsg, QuestionMsgBox, YesNoMsgBox
 from customfields import ALLOWEDCFS
 
-APPNAME = 'OpenVPN Client'
+APPNAME = 'OpenSesame'
 VERSION = 'trunk'
 
-DEFAULTS = { 'exelocation':  "C:/Program Files/JFX/OpenVPN Client/openvpn.exe",
+DEFAULTS = { 'exelocation':  "C:/Program Files/JFX/OpenSesame/openvpn.exe",
                     'windeffileloc':  "C:/Program Files/OpenVPN/config",
                         'linuxbinary':  "/usr/bin/openvpn", 
                         'linuxdeffileloc': "/home",
@@ -103,7 +103,6 @@ class ConfigDesc:
         opts.append('verb', strrange(0,10), hidden=True, default='3')
     
         self._syntaxes = opts
-        #TODO: Fill in the allowed customfields
         self._allowedCFs = ALLOWEDCFS
     
     def _hostport(self, value):
@@ -443,7 +442,7 @@ class OVConfig:
     def writeconfig(self):
         data = []
         gentime = time.strftime("%a, %d %b %Y %H:%M:%S +0000")
-        data.append('# JFX OpenVPN Client Config')
+        data.append('# OpenSesame Config')
         data.append('# Generated %s' % gentime)
         data.append('# name %s' % self._name)
         data.append('# description %s' % self._description)

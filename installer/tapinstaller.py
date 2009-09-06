@@ -1,4 +1,9 @@
 # Windows TAP-32 installer
+# OpenSesame
+
+# This file is part of OpenSesame. 
+# Copyright (C) 2009 by Rob Lemley.
+# See the README.TXT file for important information about this project.
 
 from platform import architecture
 import sys, os
@@ -28,9 +33,9 @@ OEMINF = "OemWin2k.inf"
 TAPINSTALL='tapinstall.exe'
 
 parser = OptionParser("usage: %prog [--installdir=] install|update|remove|list")
-parser.set_defaults(installdir="C:/Program Files/JFX/OpenVPN Client")
+parser.set_defaults(installdir="C:/Program Files/JFX/OpenSesame")
 parser.add_option("--installdir", type="string",
-                        help="where the OpenVPN Client is installed")
+                        help="where the OpenSesame is installed")
 
 (options, args) = parser.parse_args()
 if len(args) != 1:
@@ -42,24 +47,24 @@ if action not in ['install',  'remove', 'list']:
     parser.error("invalid action %s" % action)
 
 TAPDIR = '%s/tapinstall/%s' % (options.installdir, ARCH)
-OVPNCLIENT = '%s/JFX OpenVPNClient.exe' % options.installdir
+OVPNCLIENT = '%s/OpenSesame.exe' % options.installdir
 
 if os.path.isfile(OVPNCLIENT):
     FOUNDCLIENT = True
 else:
-    print "Error: Installdir doesn't look right. No 'JFX OpenVPNClient.exe'"
+    print "Error: Installdir doesn't look right. No 'OpenSesame.exe'"
     sys.exit(1)
     
 if os.path.isdir(TAPDIR):
     os.chdir(TAPDIR)
 else:
-    print """Error: Installdir seems correct (ie I found OpenVPNClient.exe),
+    print """Error: Installdir seems correct (ie I found OpenSesame.exe),
 but I can't find the tapinstall directory"""
     sys.exit(1)
 
 for file in [ TAPINSTALL, TAPDRV, TAPCAT, OEMINF ]:
     if not os.path.isfile(file):
-        print """Error: Installdir seems correct (ie I found OpenVPNClient.exe),
+        print """Error: Installdir seems correct (ie I found OpenSesame.exe),
 but I can't find %s""" % file
         sys.exit(1)
 

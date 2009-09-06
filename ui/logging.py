@@ -1,7 +1,7 @@
 # ui/logging.py
-# JFX OpenVPN Client
+# OpenSesame
 
-# This file is part of the JFX OpenVPN Client GUI. 
+# This file is part of the OpenSesame. 
 # Copyright (C) 2009 by Rob Lemley.
 # See the README.TXT file for important information about this project.
 

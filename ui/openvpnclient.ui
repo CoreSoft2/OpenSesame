@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>OpenVPN Client</string>
+   <string>OpenSesame</string>
   </property>
   <property name="windowIcon">
    <iconset>

@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\rob\projects\ovpnclient\trunk\ui\openvpnclient.ui'
+# Form implementation generated from reading ui file 'C:\Users\rob\projects\JFX-OpenVPN-Client\ui\openvpnclient.ui'
 #
-# Created: Mon Jul 20 18:21:24 2009
-#      by: PyQt4 UI code generator 4.5.2
+# Created: Sat Sep 05 19:41:23 2009
+#      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -144,7 +144,7 @@ class Ui_MainWindow(object):
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
-        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "OpenVPN Client", None, QtGui.QApplication.UnicodeUTF8))
+        MainWindow.setWindowTitle(QtGui.QApplication.translate("MainWindow", "OpenSesame", None, QtGui.QApplication.UnicodeUTF8))
         self.tableConnections.horizontalHeaderItem(0).setText(QtGui.QApplication.translate("MainWindow", "Status", None, QtGui.QApplication.UnicodeUTF8))
         self.tableConnections.horizontalHeaderItem(1).setText(QtGui.QApplication.translate("MainWindow", "Name", None, QtGui.QApplication.UnicodeUTF8))
         self.tableConnections.horizontalHeaderItem(2).setText(QtGui.QApplication.translate("MainWindow", "Gateway", None, QtGui.QApplication.UnicodeUTF8))

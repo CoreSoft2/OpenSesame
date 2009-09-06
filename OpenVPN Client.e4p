@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project OpenVPN Client -->
-<!-- Saved: 2009-08-23, 19:18:29 -->
+<!-- Saved: 2009-09-05, 19:58:40 -->
 <!-- Copyright (C) 2009 Rob Lemley, rob@calypsoblue.org -->
 <Project version="4.6">
   <Language>en</Language>
@@ -35,13 +35,11 @@
     <Source>installer/tapinstaller-versioninfo.txt</Source>
     <Source>license.txt</Source>
     <Source>winguiclient.mak</Source>
-    <Source>installer/openvpnclient.spec</Source>
-    <Source>openvpnclient.py</Source>
     <Source>ui/customfieldtable.py</Source>
     <Source>README.TXT</Source>
-    <Source>installer/installedfiles/jfx openvpnclient.exe.manifest</Source>
-    <Source>installer/installedfiles/tapinstaller.exe.manifest</Source>
     <Source>OVPN/customfields.py</Source>
+    <Source>opensesame.py</Source>
+    <Source>installer/opensesame.spec</Source>
   </Sources>
   <Forms>
     <Form>ui/openvpnclient.ui</Form>
@@ -61,9 +59,8 @@
     <Other>ui/resources</Other>
     <Other>installer/tapinstaller-versioninfo.txt</Other>
     <Other>installer/openvpnclient.spec</Other>
-    <Other>installer/installedfiles</Other>
   </Others>
-  <MainScript>openvpnclient.py</MainScript>
+  <MainScript>opensesame.py</MainScript>
   <Vcs>
     <VcsType>None</VcsType>
     <VcsOptions>
