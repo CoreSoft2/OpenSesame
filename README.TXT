@@ -1,9 +1,9 @@
-README.TXT  - 2009-09-05
+README.TXT  - 2009-09-08
 
 This is OpenSesame. 
 
-I'm calling this release Beta-0, 0.9.0
-Beta-1 will be 0.9.1, etc.
+I'm calling this release Beta-1, 0.9.1
+Beta-2 will be 0.9.2, etc.
 
 
 This README only refers OpenSesame, which was written by Rob Lemley.

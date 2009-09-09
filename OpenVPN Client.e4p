@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project OpenVPN Client -->
-<!-- Saved: 2009-09-05, 19:58:40 -->
+<!-- Saved: 2009-09-07, 18:37:05 -->
 <!-- Copyright (C) 2009 Rob Lemley, rob@calypsoblue.org -->
 <Project version="4.6">
   <Language>en</Language>
@@ -58,7 +58,6 @@
   <Others>
     <Other>ui/resources</Other>
     <Other>installer/tapinstaller-versioninfo.txt</Other>
-    <Other>installer/openvpnclient.spec</Other>
   </Others>
   <MainScript>opensesame.py</MainScript>
   <Vcs>

@@ -376,13 +376,16 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         if not fileName.isEmpty():
             fileName = str(fileName)
             ovconfig = config.OVConfig()
-            if ovconfig.importconf(fileName):
+            rv = ovconfig.importconf(fileName)
+            if rv[0]:
                 name = ovconfig.getname()
                 if name not in self.tableConnections.getConfigNames():
                     self.addconnection(ovconfig)
                 settingkey = 'connections/%s' % name
                 dirname, filename = ovconfig.getdir_file()
                 self.settings.setValue(settingkey, QtCore.QVariant(filename))
+            else:
+                exception.CriticalError("Import Error: %s" % rv[1])
                 
         
         

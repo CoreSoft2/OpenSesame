@@ -524,8 +524,9 @@ Are you sure you want to do this?"""
                 return (None, "Not an exported config file.")
             else:
                 onedir = directory
-            if filename not in EXPORTFILES:
-                return (None, "Not an exported config file.")
+            if filename != '':
+                if filename not in EXPORTFILES:
+                    return (None, "Not an exported config file.")
         
         # If we got this far, the filenames look good...
         
@@ -547,7 +548,7 @@ do you want to overwrite it?"""
                 shutil.move(dst, saveold)
             else:
                 shutil.rmtree(td)
-                return False
+                return (False, None)
         
         shutil.move(src, dst)
         self._name = name
@@ -557,9 +558,9 @@ do you want to overwrite it?"""
                 shutil.move(saveold, dst)
                 shutil.rmtree(td2)
                 shutil.rmtree(td)
-            return False
+            return (False, None)
         shutil.rmtree(td)
-        return True
+        return (True, None)
         
         
         

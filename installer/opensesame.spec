@@ -34,7 +34,7 @@ options = [('O', '', 'OPTION')]
 
 guianalysis = Analysis(['%s/support/_mountzlib.py' % PYINSTALLER,
            '%s/support/useUnicode.py' % PYINSTALLER,
-           '%s/openvpnclient.py' % SOURCEDIR,],
+           '%s/opensesame.py' % SOURCEDIR,],
                     pathex=[],
                     hookspath=[],
                     excludes=excludes)
