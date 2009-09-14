@@ -104,7 +104,6 @@ class ClientManager(QThread):
         self.clientmgr = {}
         
         self._mgrip = '127.0.0.1'
-        self._portbase = 16000
         
         self.exiting=False
     
@@ -113,10 +112,9 @@ class ClientManager(QThread):
         self.alldone.connect(self.finalcloseout)
         self.exec_()
             
-    def startclient(self, name):
+    def startclient(self, name, port):
         if len(self.clients) < self.MAXCLIENTS:
             ip = self._mgrip
-            port = self._portbase + len(self.clients)
             clientthread = ClientConn(name, ip, port)
             
             name=str(name)
@@ -219,8 +217,8 @@ class ClientManager(QThread):
         self.managerfinished.emit()
     
     @pyqtSlot()
-    def startconnection(self, name):
-        self.startclient(name)
+    def startconnection(self, name, port):
+        self.startclient(name, port)
         
     @pyqtSlot()
     def prepconnection(self, name):

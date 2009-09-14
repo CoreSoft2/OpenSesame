@@ -64,7 +64,7 @@ class Properties(QtGui.QDialog, Ui_Properties):
             self.checkBoxUseTCP.setCheckState(unchecked)
         remote = c['remote'][0]
         gateway, port = remote.split(' ', 1)
-        if port != self.config.DEFAULTPORT:
+        if port != self.config.DEFAULTS['defaultPort']:
             self.checkBoxPort.setCheckState(checked)
             self.enableCustomPort()
             self.lineEditPort.setText(port)
@@ -114,7 +114,7 @@ class Properties(QtGui.QDialog, Ui_Properties):
         else:
             proto = 'udp'
         self._config.append('proto', proto)
-        port = self.config.DEFAULTPORT
+        port = self.config.DEFAULTS['defaultPort']
         if self.checkBoxPort.isChecked():
             port = self.lineEditPort.text()
         host = self.lineEditGateway.text()

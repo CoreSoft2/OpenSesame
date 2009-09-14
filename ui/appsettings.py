@@ -14,12 +14,13 @@ from PyQt4 import QtGui
 from PyQt4 import QtCore
 
 from Ui_appsettings import Ui_AppSettings
+from OVPN import exception
 
 class AppSettings(QtGui.QDialog, Ui_AppSettings):
     """
     Class documentation goes here.
     """
-    def __init__(self, exelocation, trayIconWarning, parent = None):
+    def __init__(self, exelocation, trayIconWarning, mgmtPortBase, parent = None):
         """
         Constructor
         """
@@ -29,6 +30,7 @@ class AppSettings(QtGui.QDialog, Ui_AppSettings):
         
         self.setexelocation(exelocation)
         self.setTrayIconWarning(trayIconWarning)
+        self.setMgmtPortBase(mgmtPortBase)
     
     @QtCore.pyqtSignature("")
     def on_toolButtonOpenVPNEXE_clicked(self):
@@ -60,9 +62,27 @@ class AppSettings(QtGui.QDialog, Ui_AppSettings):
     def setTrayIconWarning(self, trayIconWarning):
         self.checkBoxshowTrayWarning.setChecked(trayIconWarning)
     
+    def setMgmtPortBase(self, mgmtPortBase):
+        self.lineEditManagementBasePort.setText(mgmtPortBase)
+    
     def exelocation(self):
         return self.lineEditOpenVPNEXE.text()
     
     def trayIconWarning(self):
         return self.checkBoxshowTrayWarning.isChecked()
+    
+    def mgmtPortBase(self):
+        return self.lineEditManagementBasePort.text()
+    
+    @QtCore.pyqtSignature("")
+    def on_lineEditManagementBasePort_editingFinished(self):
+        mgmtPortBase = self.mgmtPortBase()
+        ckval = mgmtPortBase.toInt()
+        if not ckval[1]:
+            exception.ConfigErrorMsg("Management Base Port must be an integer value between 1025 and 65000")
+            self.lineEditManagementBasePort.setFocus()
+        else:
+            if ckval[0] < 1025 or ckval[0] > 65000:
+                exception.ConfigErrorMsg("Management Base Port must be an integer value between 1025 and 65000")
+                self.lineEditManagementBasePort.setFocus()
 

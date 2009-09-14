@@ -29,9 +29,8 @@ DEFAULTS = { 'exelocation':  "C:/Program Files/JFX/OpenSesame/openvpn.exe",
                         'linuxdeffileloc': "/home",
                         'showTrayWarning': True,
                         'defaultPort': '1194',
+                        'defMgmtBasePort': '16000'
                     }
-
-DEFAULTPORT = '1194'
 
 EXPORTFILES = [ 'config.ovpn',  'client.crt', 'client.key', 'ca.crt', 'ta.key' ]
 

@@ -28,7 +28,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     Class documentation goes here.
     """
     closeconnection = QtCore.pyqtSignal(str)
-    startconnection = QtCore.pyqtSignal(str)
+    startconnection = QtCore.pyqtSignal(str, int)
     prepconnection = QtCore.pyqtSignal(str)
     sendPrivKey = QtCore.pyqtSignal(str, str)
     doExitCleanup = QtCore.pyqtSignal()
@@ -266,7 +266,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         else:
             self.logmaps[name] = LogMapper(logq, name, self)
         
-        self.startconnection.emit(name)
+        mgmtPortBaseTmp = config.settings.value('ManagementBasePort', QtCore.QVariant(config.DEFAULTS['defMgmtBasePort'])).toInt()
+        if mgmtPortBaseTmp[1]:
+            port = mgmtPortBaseTmp[0]
+            self.startconnection.emit(name, port)
+        else:
+            exception.ConfigErrorMsg("There is an application settings error. Please correct the Management Base Port value.")
+            self.closeconnection.emit(name)
+            return
         
         self.tableConnections.setState(name, "Connecting")
     
@@ -323,7 +330,11 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         """
         defaultexelocation = QtCore.QVariant(config.defPlatformEXE)
         exelocation = self.settings.value("EXELocation", defaultexelocation).toString()
-        appsettingsDialog = AppSettings(exelocation, self.showTrayWarning, self)
+        defaultMgmtPortBase = QtCore.QVariant(self.config.DEFAULTS['defMgmtBasePort'])
+        mgmtPortBase = self.settings.value("ManagementBasePort", defaultMgmtPortBase).toString()
+        appsettingsDialog = AppSettings(exelocation, self.showTrayWarning, mgmtPortBase, self)
+        
+        
         
         if appsettingsDialog.exec_():
             exelocation = appsettingsDialog.exelocation()
@@ -332,6 +343,8 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
             self.showTrayWarning = trayIconWarning
             tw = QtCore.QVariant(self.showTrayWarning)
             self.settings.setValue('showTrayWarning', tw)
+            mgmtPortBase = appsettingsDialog.mgmtPortBase()
+            self.settings.setValue('ManagementBasePort', QtCore.QVariant(mgmtPortBase))
             
     
     @QtCore.pyqtSignature("QModelIndex")
