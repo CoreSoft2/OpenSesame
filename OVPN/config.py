@@ -100,6 +100,8 @@ class ConfigDesc:
         opts.append('tls-auth', self._tlsauth)
         opts.append('comp-lzo', None)
         opts.append('verb', strrange(0,10), hidden=True, default='3')
+        opts.append('management-query-passwords', None)
+        opts.append('auth-user-pass', None)
     
         self._syntaxes = opts
         self._allowedCFs = ALLOWEDCFS
@@ -348,6 +350,7 @@ class OVConfig:
         
     def checkconfigsyntax(self, config):
         allowedCFs = self._desc.getallowedCFs()
+        self._usedCFs = []
         for key in config.keys():
             # WTF does this do? It looks like its checking for a screwed up
             # multidict?
@@ -473,6 +476,9 @@ Are you sure you want to do this?"""
         if reply:
             self._deleteforreal()
             settings.remove('connections/%s' % self._name)
+            return True
+        else:
+            return False
             
     def export(self, exportfile):
         """Export a config to a portable format. Useful for transferring connection

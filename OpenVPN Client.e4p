@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project OpenVPN Client -->
-<!-- Saved: 2009-09-07, 18:37:05 -->
+<!-- Saved: 2009-10-15, 15:42:43 -->
 <!-- Copyright (C) 2009 Rob Lemley, rob@calypsoblue.org -->
 <Project version="4.6">
   <Language>en</Language>
@@ -40,6 +40,8 @@
     <Source>OVPN/customfields.py</Source>
     <Source>opensesame.py</Source>
     <Source>installer/opensesame.spec</Source>
+    <Source>ui/Ui_authentry.py</Source>
+    <Source>ui/authentry.py</Source>
   </Sources>
   <Forms>
     <Form>ui/openvpnclient.ui</Form>
@@ -47,6 +49,7 @@
     <Form>ui/logging.ui</Form>
     <Form>ui/privkeyentry.ui</Form>
     <Form>ui/appsettings.ui</Form>
+    <Form>ui/authentry.ui</Form>
   </Forms>
   <Translations>
   </Translations>

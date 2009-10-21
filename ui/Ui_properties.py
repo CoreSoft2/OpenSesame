@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\rob\projects\ovpnclient\trunk\ui\properties.ui'
+# Form implementation generated from reading ui file 'C:\Users\rob\projects\JFX-OpenVPN-Client\ui\properties.ui'
 #
-# Created: Mon Jul 20 18:21:29 2009
-#      by: PyQt4 UI code generator 4.5.2
+# Created: Thu Oct 15 17:18:06 2009
+#      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -229,6 +229,9 @@ class Ui_Properties(object):
         self.checkBoxUseTap = QtGui.QCheckBox(self.verticalLayoutWidget_3)
         self.checkBoxUseTap.setObjectName("checkBoxUseTap")
         self.verticalLayout_4.addWidget(self.checkBoxUseTap)
+        self.checkBoxQueryAuth = QtGui.QCheckBox(self.verticalLayoutWidget_3)
+        self.checkBoxQueryAuth.setObjectName("checkBoxQueryAuth")
+        self.verticalLayout_4.addWidget(self.checkBoxQueryAuth)
         spacerItem7 = QtGui.QSpacerItem(20, 40, QtGui.QSizePolicy.Minimum, QtGui.QSizePolicy.Expanding)
         self.verticalLayout_4.addItem(spacerItem7)
         self.tabWidget.addTab(self.tabAdvanced, "")
@@ -327,6 +330,7 @@ class Ui_Properties(object):
         self.checkBoxUseLZO.setText(QtGui.QApplication.translate("Properties", "Use LZO data compression", None, QtGui.QApplication.UnicodeUTF8))
         self.checkBoxUseTCP.setText(QtGui.QApplication.translate("Properties", "Use a TCP connection", None, QtGui.QApplication.UnicodeUTF8))
         self.checkBoxUseTap.setText(QtGui.QApplication.translate("Properties", "Use a TAP device", None, QtGui.QApplication.UnicodeUTF8))
+        self.checkBoxQueryAuth.setText(QtGui.QApplication.translate("Properties", "Query Username & Password", None, QtGui.QApplication.UnicodeUTF8))
         self.tabWidget.setTabText(self.tabWidget.indexOf(self.tabAdvanced), QtGui.QApplication.translate("Properties", "Advanced", None, QtGui.QApplication.UnicodeUTF8))
         self.label_8.setText(QtGui.QApplication.translate("Properties", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
 "<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"

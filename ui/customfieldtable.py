@@ -22,13 +22,26 @@ class CustomFieldTable(QTableWidget):
     def removeCustomField(self):
         row = self.currentRow()
         
-        if row > 0:
+        if row >= 0:
             self.removeRow(row)
     
     def getCustomFields(self):
         rc = self.rowCount()
         for i in range(0,rc):
-            field = self.takeItem(i, 0).text()
-            value = self.takeItem(i, 1).text()
+            try:
+                field = self.takeItem(i, 0).text()
+            except:
+                continue
+            try:
+                value = self.takeItem(i, 1).text()
+            except:
+                value = None
             yield (field, value)
+    
+    def clear(self):
+        rc = self.rowCount()
+        for i in range(0,rc):
+            self.removeRow(i)
+
+
     

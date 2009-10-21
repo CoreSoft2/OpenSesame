@@ -95,6 +95,12 @@ class Properties(QtGui.QDialog, Ui_Properties):
             self.checkBoxUseLZO.setChecked(checked)
         except:
             self.checkBoxUseLZO.setChecked(unchecked)
+        try:
+            queryauth1 = c['management-query-passwords']
+            queryauth2 = c['auth-user-pass']
+            self.checkBoxQueryAuth.setChecked(checked)
+        except:
+            self.checkBoxQueryAuth.setChecked(unchecked)
         for key in self._ovconfig.getUsedCFs():
             for value in c[key]:
                 self.tableCustomFields.addCustomField(key, value)
@@ -133,8 +139,13 @@ class Properties(QtGui.QDialog, Ui_Properties):
             self._config.append('tls-auth', tlsauth)
         if self.checkBoxUseLZO.isChecked():
             self._config.append('comp-lzo')
+        if self.checkBoxQueryAuth.isChecked():
+            self._config.append('management-query-passwords')
+            self._config.append('auth-user-pass')
         # Custom field support
         for (field, value) in self.tableCustomFields.getCustomFields():
+            if value is None:
+                value=''
             self._config.append(str(field), str(value))
     
     @QtCore.pyqtSlot()
@@ -273,4 +284,3 @@ class Properties(QtGui.QDialog, Ui_Properties):
         Remove custom field.
         """
         self.tableCustomFields.removeCustomField()
-

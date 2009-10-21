@@ -120,6 +120,11 @@ class MgrClient(QtCore.QObject):
     @QtCore.pyqtSlot()
     def recvPrivKey(self, privkey):
         self.tcpSocket.writeData('password \'Private Key\' %s\n' % privkey)
+        
+    @QtCore.pyqtSlot()
+    def recvUserPass(self, username, password):
+        self.tcpSocket.writeData('username \"Auth\" %s\n' % username)
+        self.tcpSocket.writeData('password \"Auth\" %s\n' % password)
     
     @QtCore.pyqtSlot()
     def closeconnection(self):

@@ -10,7 +10,6 @@
 
 ALLOWEDCFS = [
 'local',
-'remote',
 'remote-random',
 'connect-retry',
 'connect-timeout',
@@ -23,7 +22,6 @@ ALLOWEDCFS = [
 'http-proxy-option',
 'socks-proxy',
 'socks-proxy-retry',
-'resolv-retry',
 'float',
 'ipchange',
 'dev-node',

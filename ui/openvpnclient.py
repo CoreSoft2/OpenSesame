@@ -18,6 +18,7 @@ from appsettings import AppSettings
 from properties import Properties
 from logging import LogMapper
 from privkeyentry import PrivKeyEntry, PrivKeyMapper
+from authentry import AuthEntry, AuthMapper
 
 import sys, os.path
 
@@ -30,7 +31,8 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     closeconnection = QtCore.pyqtSignal(str)
     startconnection = QtCore.pyqtSignal(str, int)
     prepconnection = QtCore.pyqtSignal(str)
-    sendPrivKey = QtCore.pyqtSignal(str, str)
+    sendPrivKey = QtCore.pyqtSignal(str, str)   # name, passphrase
+    sendUserPass = QtCore.pyqtSignal(str, str, str) # name, username, password
     doExitCleanup = QtCore.pyqtSignal()
     def __init__(self, parent = None):
         """
@@ -50,6 +52,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.loadconnections()
         self.manager = None
         self.rememberedPrivKeys = {}
+        self.rememberedAuths = {}
         self.connstate = {}
         
         self._exiting = False
@@ -100,12 +103,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.manager.posterror.connect(self.criticalError)
         self.manager.changeConnState.connect(self.updateState)
         self.manager.getPrivKeyPass.connect(self.getPrivKeyPass)
+        self.manager.getUserPass.connect(self.getUserPass)
         self.manager.clientlog.connect(self.getClientLog)
         self.manager.managerfinished.connect(self.managerfinished)
         self.startconnection.connect(self.manager.startconnection)
         self.closeconnection.connect(self.manager.closeconnection)
         self.prepconnection.connect(self.manager.prepconnection)
         self.sendPrivKey.connect(self.manager.recvPrivKey)
+        self.sendUserPass.connect(self.manager.recvUserPass)
         self.doExitCleanup.connect(self.manager.shutdown)
         
         self.manager.start()
@@ -127,11 +132,17 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             savedkey = self.rememberedPrivKeys[name]
         else:
             savedkey = None
+        if self.rememberedAuths.has_key(name):
+            savedauth = self.rememberedAuths[name]
+        else:
+            savedauth = None
             
         if oldstate == 'Auth' and state == 'Get_config':
             if savedkey and savedkey.needsCheck():
                 savedkey.setVerified()
-                print
+            if savedauth and savedauth.needsCheck():
+                savedauth.setVerified()
+            
         
         self.connstate[name] = state
         if state == 'Connected':
@@ -153,6 +164,23 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 if privKeyPass.checkBoxRemember.isChecked():
                     self.rememberedPrivKeys[name] = PrivKeyMapper(privkey)
                 self.sendPrivKey.emit(name, privkey)
+            elif rv == QtGui.QDialog.Rejected:
+                self.closeconnection.emit(name)
+    
+    @QtCore.pyqtSlot()
+    def getUserPass(self, name):
+        name = str(name)
+        if self.rememberedAuths.has_key(name) and self.rememberedAuths[name].isVerified():
+            self.sendUserPass.emit(name, self.rememberedAuths[name].username, self.rememberedAuths[name].password)
+        else:
+            UserPass = AuthEntry(parent=self)
+            rv = UserPass.exec_()
+            if rv == QtGui.QDialog.Accepted:
+                username = str(UserPass.lineEditUsername.text())
+                password = str(UserPass.lineEditPassword.text())
+                if UserPass.checkBoxRemember.isChecked():
+                    self.rememberedAuths[name] = AuthMapper(username, password)
+                self.sendUserPass.emit(name, username, password)
             elif rv == QtGui.QDialog.Rejected:
                 self.closeconnection.emit(name)
         
@@ -239,8 +267,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         key = self.tableConnections.currentRow()
         if key >= 0:
             ovconfig = self.tableConnections.configs[key]
-            ovconfig.remove()
-            self.tableConnections.removeRow(key)
+            if ovconfig.remove():
+                self.tableConnections.removeRow(key)
+            
         
     @QtCore.pyqtSignature("")
     def on_actionConnect_triggered(self):
@@ -363,6 +392,8 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         """
         del self.rememberedPrivKeys
         self.rememberedPrivKeys = {}
+        del self.rememberedAuths
+        self.rememberedAuths = {}
         exception.MsgBox("Passwords forgotten.")
     
     @QtCore.pyqtSignature("")

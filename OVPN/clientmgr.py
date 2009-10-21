@@ -96,6 +96,8 @@ class ClientManager(QThread):
     changeConnState = pyqtSignal(str, str)
     getPrivKeyPass = pyqtSignal(str)
     sendPrivKey = pyqtSignal(str)
+    getUserPass = pyqtSignal(str)
+    sendUserPass = pyqtSignal(str, str)
     def __init__(self, parent = None):
         QThread.__init__(self, parent)
         
@@ -147,7 +149,7 @@ class ClientManager(QThread):
         if state == vpnmgmt.PASSWORD_PRIVKEY:
             self.getPrivKeyPass.emit(name)
         elif state == vpnmgmt.PASSWORD_AUTH:
-            pass # not implemented
+            self.getUserPass.emit(name)
     
     @pyqtSlot()
     def vpnState(self, name, time, state, info):
@@ -161,6 +163,13 @@ class ClientManager(QThread):
         clientmgr = self.clientmgr[name]
         self.sendPrivKey.connect(clientmgr.recvPrivKey)
         self.sendPrivKey.emit(privkey)
+    
+    @pyqtSlot()
+    def recvUserPass(self, name, username, password):
+        name = str(name)
+        clientmgr = self.clientmgr[name]
+        self.sendUserPass.connect(clientmgr.recvUserPass)
+        self.sendUserPass.emit(username, password)
 
     def clientprep(self, name):
         name=str(name)
