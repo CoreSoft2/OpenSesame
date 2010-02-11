@@ -1,21 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Tasks SYSTEM "Tasks-4.2.dtd">
 <!-- eric4 tasks file for project OpenVPN Client -->
-<!-- Saved: 2009-10-20, 22:47:40 -->
+<!-- Saved: 2010-02-03, 22:01:29 -->
 <Tasks version="4.2">
   <Task priority="1" completed="False" bugfix="False">
-    <Summary>TODO:</Summary>
+    <Summary>TODO: not implemented yet</Summary>
     <Description></Description>
-    <Created>2009-09-08, 22:16:21</Created>
+    <Created>2009-11-29, 14:59:58</Created>
     <Resource>
-      <Filename>README.TXT</Filename>
-      <Linenumber>76</Linenumber>
+      <Filename>ui/chgpassphrase.py</Filename>
+      <Linenumber>28</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO: not implemented yet</Summary>
+    <Description></Description>
+    <Created>2009-11-29, 14:59:58</Created>
+    <Resource>
+      <Filename>ui/chgpassphrase.py</Filename>
+      <Linenumber>36</Linenumber>
     </Resource>
   </Task>
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: Fix the laziness here... should really specify somewhere WHAT</Summary>
     <Description></Description>
-    <Created>2009-10-20, 22:39:53</Created>
+    <Created>2010-02-01, 21:16:09</Created>
     <Resource>
       <Filename>OVPN/config.py</Filename>
       <Linenumber>374</Linenumber>
@@ -24,10 +33,19 @@
   <Task priority="1" completed="False" bugfix="False">
     <Summary>TODO: What does OpenVPN do when you send it a bad config option?</Summary>
     <Description></Description>
-    <Created>2009-10-20, 22:39:53</Created>
+    <Created>2010-02-01, 21:16:09</Created>
     <Resource>
       <Filename>OVPN/config.py</Filename>
       <Linenumber>377</Linenumber>
+    </Resource>
+  </Task>
+  <Task priority="1" completed="False" bugfix="False">
+    <Summary>TODO:</Summary>
+    <Description></Description>
+    <Created>2010-02-03, 22:01:29</Created>
+    <Resource>
+      <Filename>README.TXT</Filename>
+      <Linenumber>76</Linenumber>
     </Resource>
   </Task>
 </Tasks>
