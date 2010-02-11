@@ -1,3 +1,4 @@
 *.pyc
 *~
-
+.ropeproject
+_eric4project
