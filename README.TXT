@@ -71,7 +71,7 @@ limitations/bugs that probably need to be addressed before 1.0-Release...
     fault. That may be a bit harsh for the average Windows user... I probably need
     to make some effort to at least find out what custom field is messing up 
     OpenVPN, if that's even doable. There's a TODO item someplace for this.
-
+p
 
 TODO:
 In no particular order --
@@ -84,3 +84,6 @@ In no particular order --
   - Keep an eye on PySide, maybe switch to that -- it doesn't work on Windows yet :(
   - support different certificate configurations... like shared-key setups... pkcs11...
   - add field to display to show VPN IP when connected
+  - fix crashes when connection dies unexpectedly
+  - make sure theres no openvpn process hanging out if we crash
+  - if conn dies, make sure the gui gets reset

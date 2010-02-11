@@ -7,6 +7,11 @@
 
 # Exceptions
 
+
+import sys
+import os.path
+import traceback
+
 from PyQt4.QtGui import QMessageBox
 
 def ConfigErrorMsg(error):
@@ -66,5 +71,17 @@ def CriticalError(error):
             QMessageBox.Ok)
 
 
+def handle_exception( exc_type, exc_value, exc_traceback ):
+  filename, line, dummy, dummy = traceback.extract_tb( exc_traceback ).pop()
+  filename = os.path.basename( filename )
+  error    = "%s: %s" % ( exc_type.__name__, exc_value )
 
+  CriticalError("<center>Whoops. A critical error has occured. This is most likely a bug "
+  + "in iOpenSesame. The error is:<br/><br/>"
+  + "<b><i>%s</i></b><br/><br/>" % error
+  + "It occured at <b>line %d</b> of file <b>%s</b>.<br/><br/>"
+      % ( line, filename )
+  + "iOpenSesame will now close.</center>" )
+
+  sys.exit( 1 )
     

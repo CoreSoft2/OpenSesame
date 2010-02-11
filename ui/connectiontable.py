@@ -36,7 +36,10 @@ class ConnectionTable(QTableWidget):
         self.setItem(rc, 0, twi('Disconnected'))
         self.setItem(rc, 1, twi(name))
         self.setItem(rc, 2, twi(ovconfig.getremote()))
-        self.setItem(rc, 3, twi(ovconfig.getdescription()))
+        if ovconfig.getdescription() is not None:
+            self.setItem(rc, 3, twi(ovconfig.getdescription()))
+        else:
+            self.setItem(rc, 3, twi(''))
         
         self.resizeColumnsToContents()
     
