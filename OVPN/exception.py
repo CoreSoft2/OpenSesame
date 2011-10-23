@@ -12,7 +12,7 @@ import sys
 import os.path
 import traceback
 
-from PyQt4.QtGui import QMessageBox
+from PySide.QtGui import QMessageBox
 
 def ConfigErrorMsg(error):
     message = str(error)

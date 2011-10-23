@@ -15,7 +15,7 @@ import shutil
 import zipfile
 import tempfile
 
-from PyQt4.QtCore import QSettings
+from PySide.QtCore import QSettings
 
 from exception import ConfigErrorMsg, QuestionMsgBox, YesNoMsgBox
 from customfields import ALLOWEDCFS

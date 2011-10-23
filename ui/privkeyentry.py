@@ -9,8 +9,8 @@
 Module implementing PrivKeyEntry.
 """
 
-from PyQt4.QtGui import QDialog
-from PyQt4.QtCore import pyqtSignature, QObject
+from PySide.QtGui import QDialog
+from PySide.QtCore import pyqtSignature, QObject
 
 from Ui_privkeyentry import Ui_PrivKeyEntry
 

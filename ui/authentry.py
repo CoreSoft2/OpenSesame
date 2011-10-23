@@ -4,8 +4,8 @@
 Module implementing AuthEntry.
 """
 
-from PyQt4.QtGui import QDialog
-from PyQt4.QtCore import pyqtSignature, QObject
+from PySide.QtGui import QDialog
+from PySide.QtCore import pyqtSignature, QObject
 
 from Ui_authentry import Ui_AuthEntry
 

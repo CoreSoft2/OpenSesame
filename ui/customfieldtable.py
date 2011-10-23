@@ -5,7 +5,7 @@
 # Copyright (C) 2009 by Rob Lemley.
 # See the README.TXT file for important information about this project.
 
-from PyQt4.QtGui import QTableWidget, QTableWidgetItem
+from PySide.QtGui import QTableWidget, QTableWidgetItem
 
 class CustomFieldTable(QTableWidget):
     def addCustomField(self, key=None, value=None):
