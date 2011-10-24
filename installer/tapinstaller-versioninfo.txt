@@ -18,7 +18,7 @@ VSVersionInfo(
         StringStruct('FileDescription', 'TAP device installer'),
         StringStruct('FileVersion', '0.0.9.2'),
         StringStruct('InternalName', 'tapinstaller.exe'),
-        StringStruct('LegalCopyright', '2009 by Rob Lemley'),
+        StringStruct('LegalCopyright', '2009-2012 by Rob Lemley'),
         StringStruct('LegalTrademarks', ''),
         StringStruct('OriginalFilename', 'tapinstaller.exe'),
         StringStruct('ProductName', 'OpenSesame'),
