@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\rob\projects\JFX-OpenVPN-Client\ui\authentry.ui'
+# Form implementation generated from reading ui file '/home/rob/src/opensesame/OpenSesame/ui/authentry.ui'
 #
-# Created: Thu Oct 15 15:24:01 2009
-#      by: PySide UI code generator 4.5.4
+# Created: Sun Oct 23 17:17:49 2011
+#      by: pyside-uic 0.2.11 running on PySide 1.0.6
 #
 # WARNING! All changes made in this file will be lost!
 

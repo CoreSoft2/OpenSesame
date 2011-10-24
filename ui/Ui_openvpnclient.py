@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\rob\projects\JFX-OpenVPN-Client\ui\openvpnclient.ui'
+# Form implementation generated from reading ui file '/home/rob/src/opensesame/OpenSesame/ui/openvpnclient.ui'
 #
-# Created: Sat Sep 05 19:41:23 2009
-#      by: PySide UI code generator 4.5.4
+# Created: Sun Oct 23 17:17:45 2011
+#      by: pyside-uic 0.2.11 running on PySide 1.0.6
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -22,7 +22,7 @@ class Ui_MainWindow(object):
         self.tableConnections.setGeometry(QtCore.QRect(0, 0, 591, 231))
         self.tableConnections.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tableConnections.setTabKeyNavigation(False)
-        self.tableConnections.setProperty("showDropIndicator", QtCore.QVariant(False))
+        self.tableConnections.setProperty("showDropIndicator", False)
         self.tableConnections.setDragDropOverwriteMode(False)
         self.tableConnections.setAlternatingRowColors(True)
         self.tableConnections.setSelectionMode(QtGui.QAbstractItemView.SingleSelection)

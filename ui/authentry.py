@@ -5,13 +5,13 @@ Module implementing AuthEntry.
 """
 
 from PySide.QtGui import QDialog
-from PySide.QtCore import pyqtSignature, QObject
+from PySide.QtCore import Slot, QObject
 
 from Ui_authentry import Ui_AuthEntry
 
 class AuthMapper(QObject):
     def __init__(self, username, password, parent = None):
-        QObject.__init__(self, parent)
+        super(AuthMapper,  self).__init__(parent)
         self.username = username
         self.password = password
         self.verified = False
@@ -39,6 +39,6 @@ class AuthEntry(QDialog, Ui_AuthEntry):
         """
         Constructor
         """
-        QDialog.__init__(self, parent)
+        super(AuthEntry,  self).__init__(parent)
         self.setupUi(self)
         self.lineEditUsername.setFocus()

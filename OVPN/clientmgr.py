@@ -5,7 +5,7 @@
 # Copyright (C) 2009 by Rob Lemley.
 # See the README.TXT file for important information about this project.
 
-from PySide.QtCore import QString, QThread, QProcess, QVariant, SIGNAL, pyqtSignal, pyqtSlot
+from PySide.QtCore import  QThread, QProcess, Signal, Slot
 from Queue import Queue
 import random
 
@@ -14,13 +14,13 @@ import config
 import vpnmgmt
 
 
-exelocation = config.settings.value('EXELocation', QVariant(config.defPlatformEXE)).toString()
+exelocation = config.settings.value('EXELocation', config.defPlatformEXE)
 
 class ClientConn(QThread):
-    logready = pyqtSignal(str, str)
-    processfinished = pyqtSignal(str)
+    logready = Signal(str, str)
+    processfinished = Signal(str)
     def __init__(self, name, ip, port, parent = None):
-        QThread.__init__(self, parent)
+        super(ClientConn,  self).__init__(parent)
         
         self.mgrip = ip
         self.port = str(port)
@@ -69,13 +69,13 @@ class ClientConn(QThread):
                 self.process.kill()
             self.process = None
 
-    @pyqtSlot()
+    @Slot()
     def readlog(self):
         log = self.process.readAll()
         log = str(log)
         self.logready.emit(self._name, log)
     
-    @pyqtSlot(int)
+    @Slot(int)
     def processdone(self, rv):
         self.logready.emit(self._name, 'OpenVPN Finished.')
         self.exiting = True
@@ -86,20 +86,20 @@ class ClientConn(QThread):
 
 class ClientManager(QThread):
     MAXCLIENTS = 1
-    clientlog = pyqtSignal(str)
-    clientclosed = pyqtSignal(str)
-    alldone = pyqtSignal()
-    managerfinished = pyqtSignal()
-    closeclient = pyqtSignal()
-    logqueueready = pyqtSignal(str, "Queue")
-    posterror = pyqtSignal(str)
-    changeConnState = pyqtSignal(str, str)
-    getPrivKeyPass = pyqtSignal(str)
-    sendPrivKey = pyqtSignal(str)
-    getUserPass = pyqtSignal(str)
-    sendUserPass = pyqtSignal(str, str)
+    clientlog = Signal(str)
+    clientclosed = Signal(str)
+    alldone = Signal()
+    managerfinished = Signal()
+    closeclient = Signal()
+    logqueueready = Signal(str, "Queue")
+    posterror = Signal(str)
+    changeConnState = Signal(str, str)
+    getPrivKeyPass = Signal(str)
+    sendPrivKey = Signal(str)
+    getUserPass = Signal(str)
+    sendUserPass = Signal(str, str)
     def __init__(self, parent = None):
-        QThread.__init__(self, parent)
+        super(ClientManager,  self).__init__(parent)
         
         self.clients = {}
         self.logs = {}
@@ -137,13 +137,13 @@ class ClientManager(QThread):
             self.posterror.emit('Too many connections')
     
     # Manager slots
-    @pyqtSlot()
+    @Slot()
     def errState(self, name, error):
         name = str(name)
         error = str(error)
         self.posterror.emit("Error in client manager for %s.\n%s" % (name, error))
     
-    @pyqtSlot()
+    @Slot()
     def passwordState(self, name, state):
         name = str(name)
         if state == vpnmgmt.PASSWORD_PRIVKEY:
@@ -151,20 +151,20 @@ class ClientManager(QThread):
         elif state == vpnmgmt.PASSWORD_AUTH:
             self.getUserPass.emit(name)
     
-    @pyqtSlot()
+    @Slot()
     def vpnState(self, name, time, state, info):
         self.changeConnState.emit(name, state)
     
     ##
     
-    @pyqtSlot()
+    @Slot()
     def recvPrivKey(self, name, privkey):
         name = str(name)
         clientmgr = self.clientmgr[name]
         self.sendPrivKey.connect(clientmgr.recvPrivKey)
         self.sendPrivKey.emit(privkey)
     
-    @pyqtSlot()
+    @Slot()
     def recvUserPass(self, name, username, password):
         name = str(name)
         clientmgr = self.clientmgr[name]
@@ -179,7 +179,7 @@ class ClientManager(QThread):
         else:
             self.posterror.emit('Too many connections')
 
-    @pyqtSlot()
+    @Slot()
     def shutdown(self):
         self.exiting = True
         if self.exiting:
@@ -190,13 +190,13 @@ class ClientManager(QThread):
                     self.closeclient.connect(self.clientmgr[name].closeconnection)
                     self.closeclient.emit()
 
-    @pyqtSlot()
+    @Slot()
     def readclientlog(self, name, log):
         name = str(name)
         self.logs[name].put(log)
         self.clientlog.emit(name)
     
-    @pyqtSlot()
+    @Slot()
     def clientdone(self, name):
         name = str(name)
         self.clients[name] = None
@@ -208,7 +208,7 @@ class ClientManager(QThread):
         self.changeConnState.emit(name, "Disconnected")
         self.clientclosed.emit(name)
     
-    @pyqtSlot()
+    @Slot()
     def watchclientsfinish(self, name):
         if self.exiting:
             name = str(name)
@@ -218,22 +218,22 @@ class ClientManager(QThread):
             if len(self.clients) == 0:
                 self.alldone.emit()
     
-    @pyqtSlot()
+    @Slot()
     def finalcloseout(self):
         if self.isRunning():
             self.quit()
         self.wait()
         self.managerfinished.emit()
     
-    @pyqtSlot()
+    @Slot()
     def startconnection(self, name, port):
         self.startclient(name, port)
         
-    @pyqtSlot()
+    @Slot()
     def prepconnection(self, name):
         self.clientprep(name)
     
-    @pyqtSlot()
+    @Slot()
     def closeconnection(self, name):
         name = str(name)
         if self.clientmgr.has_key(name):
