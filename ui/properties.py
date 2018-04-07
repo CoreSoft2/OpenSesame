@@ -9,8 +9,8 @@
 Module implementing Properties.
 """
 
-from PySide import QtGui
-from PySide import QtCore
+from PyQt4 import QtGui
+from PyQt4 import QtCore
 
 from Ui_properties import Ui_Properties
 

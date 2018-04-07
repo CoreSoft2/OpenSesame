@@ -3,11 +3,11 @@
 # Form implementation generated from reading ui file 'C:\Users\rob\projects\JFX-OpenVPN-Client\ui\properties.ui'
 #
 # Created: Thu Oct 15 17:18:06 2009
-#      by: PySide UI code generator 4.5.4
+#      by: PyQt4 UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
 
-from PySide import QtCore, QtGui
+from PyQt4 import QtCore, QtGui
 
 class Ui_Properties(object):
     def setupUi(self, Properties):

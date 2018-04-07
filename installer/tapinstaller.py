@@ -7,7 +7,7 @@
 
 from platform import architecture
 import sys, os
-from PySide.QtCore import QProcess
+from PyQt4.QtCore import QProcess
 from optparse import OptionParser
 
 if os.name != 'nt':

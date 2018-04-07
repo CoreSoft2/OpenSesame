@@ -6,7 +6,7 @@
 # See the README.TXT file for important information about this project.
 
 
-from PySide import QtCore, QtNetwork
+from PyQt4 import QtCore, QtNetwork
 import time
 
 STATE_NONE = 0

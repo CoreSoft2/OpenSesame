@@ -5,7 +5,7 @@
 # Copyright (C) 2009 by Rob Lemley.
 # See the README.TXT file for important information about this project.
 
-from PySide.QtCore import QString, QThread, QProcess, QVariant, SIGNAL, pyqtSignal, pyqtSlot
+from PyQt4.QtCore import QString, QThread, QProcess, QVariant, SIGNAL, pyqtSignal, pyqtSlot
 from Queue import Queue
 import random
 

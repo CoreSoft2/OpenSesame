@@ -3,11 +3,11 @@
 # Form implementation generated from reading ui file 'C:\Users\rob\projects\ovpnclient\trunk\ui\logging.ui'
 #
 # Created: Mon Jul 20 17:09:03 2009
-#      by: PySide UI code generator 4.5.2
+#      by: PyQt4 UI code generator 4.5.2
 #
 # WARNING! All changes made in this file will be lost!
 
-from PySide import QtCore, QtGui
+from PyQt4 import QtCore, QtGui
 
 class Ui_Log(object):
     def setupUi(self, Log):

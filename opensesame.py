@@ -7,7 +7,7 @@
 
 if __name__ == '__main__':
     import sys
-    from PySide.QtGui import QApplication
+    from PyQt4.QtGui import QApplication
     from ui.openvpnclient import MainWindow
     app = QApplication(sys.argv)
     mainWin = MainWindow()

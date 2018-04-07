@@ -10,8 +10,8 @@ Module implementing Settings.
 """
 
 import os
-from PySide import QtGui
-from PySide import QtCore
+from PyQt4 import QtGui
+from PyQt4 import QtCore
 
 from Ui_appsettings import Ui_AppSettings
 from OVPN import exception

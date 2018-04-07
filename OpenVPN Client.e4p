@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project OpenVPN Client -->
-<!-- Saved: 2011-10-23, 16:28:00 -->
-<!-- Copyright (C) 2011 Rob Lemley, rob@calypsoblue.org -->
+<!-- Saved: 2010-02-11, 09:16:10 -->
+<!-- Copyright (C) 2010 Rob Lemley, rob@calypsoblue.org -->
 <Project version="4.6">
   <Language>en</Language>
   <ProgLanguage mixed="0">Python</ProgLanguage>
@@ -42,6 +42,8 @@
     <Source>installer/opensesame.spec</Source>
     <Source>ui/Ui_authentry.py</Source>
     <Source>ui/authentry.py</Source>
+    <Source>ui/Ui_chgpassphrase.py</Source>
+    <Source>ui/chgpassphrase.py</Source>
   </Sources>
   <Forms>
     <Form>ui/openvpnclient.ui</Form>
@@ -50,6 +52,7 @@
     <Form>ui/privkeyentry.ui</Form>
     <Form>ui/appsettings.ui</Form>
     <Form>ui/authentry.ui</Form>
+    <Form>ui/chgpassphrase.ui</Form>
   </Forms>
   <Translations>
   </Translations>
