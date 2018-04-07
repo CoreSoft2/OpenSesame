@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/rob/src/opensesame/OpenSesame/ui/logging.ui'
+# Form implementation generated from reading ui file 'C:\Users\rob\projects\ovpnclient\trunk\ui\logging.ui'
 #
-# Created: Sun Oct 23 17:17:47 2011
-#      by: pyside-uic 0.2.11 running on PySide 1.0.6
+# Created: Mon Jul 20 17:09:03 2009
+#      by: PySide UI code generator 4.5.2
 #
 # WARNING! All changes made in this file will be lost!
 

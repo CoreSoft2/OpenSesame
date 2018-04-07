@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/rob/src/opensesame/OpenSesame/ui/properties.ui'
+# Form implementation generated from reading ui file 'C:\Users\rob\projects\JFX-OpenVPN-Client\ui\properties.ui'
 #
-# Created: Sun Oct 23 17:17:46 2011
-#      by: pyside-uic 0.2.11 running on PySide 1.0.6
+# Created: Thu Oct 15 17:18:06 2009
+#      by: PySide UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -29,7 +29,6 @@ class Ui_Properties(object):
         self.verticalLayout.setContentsMargins(10, -1, 10, -1)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout = QtGui.QHBoxLayout()
-        self.horizontalLayout.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.label = QtGui.QLabel(self.verticalLayoutWidget)
         sizePolicy = QtGui.QSizePolicy(QtGui.QSizePolicy.Fixed, QtGui.QSizePolicy.Fixed)
@@ -38,7 +37,6 @@ class Ui_Properties(object):
         sizePolicy.setHeightForWidth(self.label.sizePolicy().hasHeightForWidth())
         self.label.setSizePolicy(sizePolicy)
         self.label.setMaximumSize(QtCore.QSize(64, 64))
-        self.label.setText("")
         self.label.setPixmap(QtGui.QPixmap(":/resources/openvpn-client.png"))
         self.label.setScaledContents(True)
         self.label.setObjectName("label")
@@ -181,9 +179,9 @@ class Ui_Properties(object):
         self.comboBoxKeyDirection = QtGui.QComboBox(self.verticalLayoutWidget_2)
         self.comboBoxKeyDirection.setEnabled(False)
         self.comboBoxKeyDirection.setObjectName("comboBoxKeyDirection")
-        self.comboBoxKeyDirection.addItem("")
-        self.comboBoxKeyDirection.addItem("")
-        self.comboBoxKeyDirection.addItem("")
+        self.comboBoxKeyDirection.addItem(QtCore.QString())
+        self.comboBoxKeyDirection.addItem(QtCore.QString())
+        self.comboBoxKeyDirection.addItem(QtCore.QString())
         self.gridLayout_2.addWidget(self.comboBoxKeyDirection, 1, 1, 1, 1)
         self.label_11 = QtGui.QLabel(self.verticalLayoutWidget_2)
         self.label_11.setTextFormat(QtCore.Qt.RichText)
@@ -203,7 +201,6 @@ class Ui_Properties(object):
         self.verticalLayout_4.setContentsMargins(15, 5, -1, -1)
         self.verticalLayout_4.setObjectName("verticalLayout_4")
         self.horizontalLayout_8 = QtGui.QHBoxLayout()
-        self.horizontalLayout_8.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_8.setObjectName("horizontalLayout_8")
         self.checkBoxPort = QtGui.QCheckBox(self.verticalLayoutWidget_3)
         self.checkBoxPort.setObjectName("checkBoxPort")

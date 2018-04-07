@@ -19,13 +19,13 @@ PASSWORD_PRIVKEY = 0
 PASSWORD_AUTH = 1
 
 class MgrClient(QtCore.QObject):
-    holdState = QtCore.Signal()
-    errState = QtCore.Signal(str, str)
-    successState = QtCore.Signal(str, )
-    passwordState = QtCore.Signal(str, int)
-    vpnState = QtCore.Signal(str, int, str, str)
-    vpnInfo = QtCore.Signal(str, str)
-    mgrConnected = QtCore.Signal()
+    holdState = QtCore.pyqtSignal()
+    errState = QtCore.pyqtSignal(str, str)
+    successState = QtCore.pyqtSignal(str, )
+    passwordState = QtCore.pyqtSignal(str, int)
+    vpnState = QtCore.pyqtSignal(str, int, str, str)
+    vpnInfo = QtCore.pyqtSignal(str, str)
+    mgrConnected = QtCore.pyqtSignal()
     def __init__(self, name, parent=None):
         super(MgrClient, self).__init__(parent)
         
@@ -45,7 +45,7 @@ class MgrClient(QtCore.QObject):
         
         self._closing = False
 
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def getError(self, error):
         if error == QtNetwork.QAbstractSocket.RemoteHostClosedError and self._closing:
             return
@@ -56,12 +56,12 @@ class MgrClient(QtCore.QObject):
         self.tcpSocket.abort()
         self.tcpSocket.connectToHost(host, port)
     
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def sendInit(self):
         self.tcpSocket.writeData('state on all\n')
         self.tcpSocket.writeData('auth-retry interact\n')
     
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def releaseHold(self):
         if self.state == STATE_HOLD:
             self.tcpSocket.writeData('hold release\n')
@@ -105,28 +105,28 @@ class MgrClient(QtCore.QObject):
         else:
             pass        # ignore everything else for now?
     
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def connReady(self):
         now = int(time.time())
         self.mgrConnected.emit()
         self.vpnState.emit(self._name, now, self.vpnstate, '')
     
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def readConn(self):
         while self.tcpSocket.canReadLine():
             line = self.tcpSocket.readLine()
             self.processLine(line)
             
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def recvPrivKey(self, privkey):
         self.tcpSocket.writeData('password \'Private Key\' %s\n' % privkey)
         
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def recvUserPass(self, username, password):
         self.tcpSocket.writeData('username \"Auth\" %s\n' % username)
         self.tcpSocket.writeData('password \"Auth\" %s\n' % password)
     
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def closeconnection(self):
         self._closing = True
         self.tcpSocket.writeData('signal SIGTERM\n')

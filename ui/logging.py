@@ -17,7 +17,7 @@ from Ui_logging import Ui_Log
 
 class LogMapper(QtCore.QObject):
     def __init__(self, queue, name, parent):
-        super(LogMapper,  self).__init__(parent)
+        QtCore.QObject.__init__(self, parent)
         self.Q = queue
         self.name = name
         self.log = ''
@@ -58,9 +58,9 @@ class Log(QtGui.QDialog, Ui_Log):
         """
         Constructor
         """
-        super(Log,  self).__init__(parent)
+        QtGui.QDialog.__init__(self, parent)
         self.setupUi(self)
     
-    #@QtCore.Slot()
+    #@QtCore.pyqtSlot()
     def readlog(self, e):
         self.plainTextEditLog.appendPlainText(str(e))

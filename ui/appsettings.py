@@ -24,7 +24,7 @@ class AppSettings(QtGui.QDialog, Ui_AppSettings):
         """
         Constructor
         """
-        super(AppSettings,  self).__init__(parent)
+        QtGui.QDialog.__init__(self, parent)
         
         self.setupUi(self)
         
@@ -32,13 +32,13 @@ class AppSettings(QtGui.QDialog, Ui_AppSettings):
         self.setTrayIconWarning(trayIconWarning)
         self.setMgmtPortBase(mgmtPortBase)
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_toolButtonOpenVPNEXE_clicked(self):
         """
         Slot documentation goes here.
         """
         options = QtGui.QFileDialog.Options()
-        selectedFilter = ''
+        selectedFilter = QtCore.QString()
         if self.parent().config.platform == 'win32':
             fileName = QtGui.QFileDialog.getOpenFileName(self,
                     self.tr("Find openvpn.exe ..."),
@@ -74,7 +74,7 @@ class AppSettings(QtGui.QDialog, Ui_AppSettings):
     def mgmtPortBase(self):
         return self.lineEditManagementBasePort.text()
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_lineEditManagementBasePort_editingFinished(self):
         mgmtPortBase = self.mgmtPortBase()
         ckval = mgmtPortBase.toInt()

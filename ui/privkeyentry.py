@@ -10,13 +10,13 @@ Module implementing PrivKeyEntry.
 """
 
 from PySide.QtGui import QDialog
-from PySide.QtCore import Slot, QObject
+from PySide.QtCore import pyqtSignature, QObject
 
 from Ui_privkeyentry import Ui_PrivKeyEntry
 
 class PrivKeyMapper(QObject):
     def __init__(self, passphrase, parent = None):
-        super(PrivKeyMapper,  self).__init__(parent)
+        QObject.__init__(self, parent)
         self.passphrase = passphrase
         self.verified = False
         self.docheck = True
@@ -42,6 +42,6 @@ class PrivKeyEntry(QDialog, Ui_PrivKeyEntry):
         """
         Constructor
         """
-        super(PrivKeyEntry,  self).__init__(parent)
+        QDialog.__init__(self, parent)
         self.setupUi(self)
         self.lineEditPrivKey.setFocus()

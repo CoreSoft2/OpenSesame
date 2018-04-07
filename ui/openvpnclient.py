@@ -28,23 +28,23 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
     """
     Class documentation goes here.
     """
-    closeconnection = QtCore.Signal(str)
-    startconnection = QtCore.Signal(str, int)
-    prepconnection = QtCore.Signal(str)
-    sendPrivKey = QtCore.Signal(str, str)   # name, passphrase
-    sendUserPass = QtCore.Signal(str, str, str) # name, username, password
-    doExitCleanup = QtCore.Signal()
+    closeconnection = QtCore.pyqtSignal(str)
+    startconnection = QtCore.pyqtSignal(str, int)
+    prepconnection = QtCore.pyqtSignal(str)
+    sendPrivKey = QtCore.pyqtSignal(str, str)   # name, passphrase
+    sendUserPass = QtCore.pyqtSignal(str, str, str) # name, username, password
+    doExitCleanup = QtCore.pyqtSignal()
     def __init__(self, parent = None):
         """
         Constructor
         """
-        super(MainWindow,  self).__init__(parent)
+        QtGui.QMainWindow.__init__(self, parent)
         self.setupUi(self)
         
         self.settings = config.settings
         
         self.createTrayIcon()
-        showTrayWarning = self.settings.value('showTrayWarning', config.DEFAULTS['showTrayWarning'])
+        showTrayWarning = self.settings.value('showTrayWarning', QtCore.QVariant(config.DEFAULTS['showTrayWarning'])).toBool()
         self.showTrayWarning = showTrayWarning
         
         self.logmaps = {}
@@ -66,7 +66,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                                 "tray entry.")
                 if rv:
                     self.showTrayWarning = False
-                    tw = self.showTrayWarning
+                    tw = QtCore.QVariant(self.showTrayWarning)
                     self.settings.setValue('showTrayWarning', tw)
             self.hide()
             event.ignore()   
@@ -115,11 +115,11 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
         self.manager.start()
 
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def criticalError(self, msg):
         exception.CriticalError(msg)
     
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def updateState(self, name, state):
         name = str(name)
         state = str(state).capitalize()
@@ -151,7 +151,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             self.trayIcon.setIcon(self.disconnectedIcon)
         self.tableConnections.setState(name, state)
     
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def getPrivKeyPass(self, name):
         name = str(name)
         if self.rememberedPrivKeys.has_key(name) and self.rememberedPrivKeys[name].isVerified():
@@ -167,7 +167,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             elif rv == QtGui.QDialog.Rejected:
                 self.closeconnection.emit(name)
     
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def getUserPass(self, name):
         name = str(name)
         if self.rememberedAuths.has_key(name) and self.rememberedAuths[name].isVerified():
@@ -200,7 +200,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.tableConnections.editRow(key, ovconfig)
         
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionExit_triggered(self):
         """
         Slot documentation goes here.
@@ -217,14 +217,14 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 self.doExitCleanup.emit()
 
 
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def managerfinished(self):
         if self.manager:
             self.manager.wait()
         self.manager = None
         self.close()
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionNew_triggered(self):
         """
         Create a new config
@@ -236,9 +236,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             ovconfig.copycerts()
             filename = ovconfig.writeconfig()
             settingkey = 'connections/%s' % ovconfig.getname()
-            self.settings.setValue(settingkey, filename)
+            self.settings.setValue(settingkey, QtCore.QVariant(filename))
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionProperties_triggered(self):
         """
         Slot documentation goes here.
@@ -257,9 +257,9 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 ovconfig.copycerts()
                 filename = ovconfig.writeconfig()
                 settingkey = 'connections/%s' % ovconfig.getname()
-                self.settings.setValue(settingkey, filename)
+                self.settings.setValue(settingkey, QtCore.QVariant(filename))
 
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionDelete_triggered(self):
         """
         Slot documentation goes here.
@@ -271,7 +271,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 self.tableConnections.removeRow(key)
             
         
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionConnect_triggered(self):
         """
         Slot documentation goes here.
@@ -286,7 +286,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             
             self.prepconnection.emit(name)
 
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def finishconnection(self, name, logq):
         name=str(name)
         if self.logmaps.has_key(name):
@@ -295,7 +295,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         else:
             self.logmaps[name] = LogMapper(logq, name, self)
         
-        mgmtPortBaseTmp = config.settings.value('ManagementBasePort', config.DEFAULTS['defMgmtBasePort']).toInt()
+        mgmtPortBaseTmp = config.settings.value('ManagementBasePort', QtCore.QVariant(config.DEFAULTS['defMgmtBasePort'])).toInt()
         if mgmtPortBaseTmp[1]:
             port = mgmtPortBaseTmp[0]
             self.startconnection.emit(name, port)
@@ -306,7 +306,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
         self.tableConnections.setState(name, "Connecting")
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionDisconnect_triggered(self):
         """
         Slot documentation goes here.
@@ -317,7 +317,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             name = ovconfig.getname()
             self.closeconnection.emit(name)
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionLogging_triggered(self):
         """
         Slot documentation goes here.
@@ -333,12 +333,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             else:
                 exception.CriticalError('No log available for connection %s.' % name)
 
-    @QtCore.Slot()
+    @QtCore.pyqtSlot()
     def getClientLog(self, name):
         name = str(name)
         self.logmaps[name].getLog()
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionAbout_triggered(self):
         """
         Call about dialog
@@ -352,31 +352,31 @@ OpenSesame is distributed under the terms of the GPL license version 3. See lice
 For license terms for OpenVPN and its components, see openvpn-license.txt."""))
 
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionSettings_triggered(self):
         """
         Open the app settings dialog.
         """
-        defaultexelocation = config.defPlatformEXE
-        exelocation = self.settings.value("EXELocation", defaultexelocation)
-        defaultMgmtPortBase = self.config.DEFAULTS['defMgmtBasePort']
-        mgmtPortBase = self.settings.value("ManagementBasePort", defaultMgmtPortBase)
+        defaultexelocation = QtCore.QVariant(config.defPlatformEXE)
+        exelocation = self.settings.value("EXELocation", defaultexelocation).toString()
+        defaultMgmtPortBase = QtCore.QVariant(self.config.DEFAULTS['defMgmtBasePort'])
+        mgmtPortBase = self.settings.value("ManagementBasePort", defaultMgmtPortBase).toString()
         appsettingsDialog = AppSettings(exelocation, self.showTrayWarning, mgmtPortBase, self)
         
         
         
         if appsettingsDialog.exec_():
             exelocation = appsettingsDialog.exelocation()
-            self.settings.setValue("EXELocation", exelocation)
+            self.settings.setValue("EXELocation", QtCore.QVariant(exelocation))
             trayIconWarning = appsettingsDialog.trayIconWarning()
             self.showTrayWarning = trayIconWarning
-            tw = self.showTrayWarning
+            tw = QtCore.QVariant(self.showTrayWarning)
             self.settings.setValue('showTrayWarning', tw)
             mgmtPortBase = appsettingsDialog.mgmtPortBase()
-            self.settings.setValue('ManagementBasePort', mgmtPortBase)
+            self.settings.setValue('ManagementBasePort', QtCore.QVariant(mgmtPortBase))
             
     
-    @QtCore.Slot("QModelIndex")
+    @QtCore.pyqtSignature("QModelIndex")
     def on_tableConnections_doubleClicked(self, index):
         """
         double-click on a connection row
@@ -385,7 +385,7 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         if row >= 0:
             self.doProperties(row)
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionForget_Password_triggered(self):
         """
         Slot documentation goes here.
@@ -396,7 +396,7 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         self.rememberedAuths = {}
         exception.MsgBox("Passwords forgotten.")
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionAbout_Qt_triggered(self):
         """
         Slot documentation goes here.
@@ -404,13 +404,13 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         QtGui.QMessageBox.aboutQt(None, 
             self.trUtf8("About Qt..."))
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionImport_triggered(self):
         """
         Import a config.
         """
         options = QtGui.QFileDialog.Options()
-        selectedFilter = ''
+        selectedFilter = QtCore.QString()
         homeDir = QtCore.QDir.homePath()
         fileName = QtGui.QFileDialog.getOpenFileName(self,
                 self.tr("Import VPN Configuration"),
@@ -427,14 +427,14 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
                     self.addconnection(ovconfig)
                 settingkey = 'connections/%s' % name
                 dirname, filename = ovconfig.getdir_file()
-                self.settings.setValue(settingkey, filename)
+                self.settings.setValue(settingkey, QtCore.QVariant(filename))
             else:
                 exception.CriticalError("Import Error: %s" % rv[1])
                 
         
         
     
-    @QtCore.Slot("")
+    @QtCore.pyqtSignature("")
     def on_actionExport_triggered(self):
         """
         Export a config file for transfer to another computer.
@@ -444,7 +444,7 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
             ovconfig = self.tableConnections.configs[key]
             
             options = QtGui.QFileDialog.Options()
-            selectedFilter = ''
+            selectedFilter = QtCore.QString()
             homeDir = QtCore.QDir.homePath()
             fileName = QtGui.QFileDialog.getSaveFileName(self,
                 self.tr("Export VPN Configuration"),

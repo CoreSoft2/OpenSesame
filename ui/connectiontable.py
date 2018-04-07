@@ -10,7 +10,7 @@ from PySide.QtGui import QTableWidget, QTableWidgetItem
 
 class ConnectionTable(QTableWidget):
     def __init__(self, parent=None):
-        super(ConnectionTable, self).__init__(parent)
+        QTableWidget.__init__(self, parent)
         self.configs = {}
         self.map = {}
     

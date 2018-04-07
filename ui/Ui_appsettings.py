@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file '/home/rob/src/opensesame/OpenSesame/ui/appsettings.ui'
+# Form implementation generated from reading ui file 'C:\Users\rob\projects\JFX-OpenVPN-Client\ui\appsettings.ui'
 #
-# Created: Sun Oct 23 17:17:48 2011
-#      by: pyside-uic 0.2.11 running on PySide 1.0.6
+# Created: Sat Sep 12 17:29:13 2009
+#      by: PySide UI code generator 4.5.4
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -28,7 +28,6 @@ class Ui_AppSettings(object):
         self.verticalLayout.setContentsMargins(10, 5, 10, 5)
         self.verticalLayout.setObjectName("verticalLayout")
         self.horizontalLayout_2 = QtGui.QHBoxLayout()
-        self.horizontalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.horizontalLayout_2.setObjectName("horizontalLayout_2")
         self.label = QtGui.QLabel(self.verticalLayoutWidget)
         self.label.setObjectName("label")
