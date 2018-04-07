@@ -6,6 +6,7 @@ This is the new dev branch of OpenSesame. This is where I'll work
 on bringing OpenSesame up to date for 2018 and beyond. Things to fix
 in no particular order:
 
+ - Switch to Python 3
  - Support PyQt5
  - Switch to PyCharm IDE
  - Support current OpenVPN
