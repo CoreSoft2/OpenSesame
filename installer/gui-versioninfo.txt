@@ -18,7 +18,7 @@ VSVersionInfo(
         StringStruct('FileDescription', 'OpenSesame'),
         StringStruct('FileVersion', '0.0.9.2'),
         StringStruct('InternalName', 'OpenSesame.exe'),
-        StringStruct('LegalCopyright', '2009-2012 by Rob Lemley'),
+        StringStruct('LegalCopyright', '2009 by Rob Lemley'),
         StringStruct('LegalTrademarks', ''),
         StringStruct('OriginalFilename', 'OpenSesame.exe'),
         StringStruct('ProductName', 'OpenSesame'),

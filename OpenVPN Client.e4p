@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-4.6.dtd">
 <!-- eric4 project file for project OpenVPN Client -->
-<!-- Saved: 2011-10-23, 17:31:15 -->
+<!-- Saved: 2011-10-23, 16:28:00 -->
 <!-- Copyright (C) 2011 Rob Lemley, rob@calypsoblue.org -->
 <Project version="4.6">
   <Language>en</Language>
   <ProgLanguage mixed="0">Python</ProgLanguage>
-  <ProjectType>PySide</ProjectType>
+  <ProjectType>Qt4</ProjectType>
   <Description>A new openvpn client gui for Windows</Description>
   <Version>0.1</Version>
   <Author>Rob Lemley</Author>
@@ -177,6 +177,7 @@
     </VcsOtherData>
   </Vcs>
   <FiletypeAssociations>
+    <FiletypeAssociation pattern="*.tac" type="SOURCES" />
     <FiletypeAssociation pattern="*.ui" type="FORMS" />
     <FiletypeAssociation pattern="*.idl" type="INTERFACES" />
     <FiletypeAssociation pattern="*.qm" type="TRANSLATIONS" />

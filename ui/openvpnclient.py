@@ -2,7 +2,7 @@
 # OpenSesame
 
 # This file is part of OpenSesame. 
-# Copyright (C) 2009-2012 by Rob Lemley.
+# Copyright (C) 2009 by Rob Lemley.
 # See the README.TXT file for important information about this project.
 
 """
@@ -345,7 +345,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         """
         QtGui.QMessageBox.about(None,
             self.trUtf8("About OpenSesame - Version %s" % config.VERSION),
-            self.trUtf8("""Copyright (C) 2009-2012 by Rob Lemley
+            self.trUtf8("""Copyright (C) 2009 by Rob Lemley
 
 OpenSesame is distributed under the terms of the GPL license version 3. See license.txt for the full license.
 
