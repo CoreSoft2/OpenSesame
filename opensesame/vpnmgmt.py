@@ -1,4 +1,4 @@
-# OVPN/vpnmgmt.py
+# opensesame/vpnmgmt.py
 # OpenSesame
 
 # This file is part of OpenSesame. 
@@ -6,7 +6,7 @@
 # See the README.TXT file for important information about this project.
 
 
-from PyQt4 import QtCore, QtNetwork
+from PyQt5 import QtCore, QtNetwork
 import time
 
 STATE_NONE = 0

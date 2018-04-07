@@ -9,10 +9,10 @@
 Module implementing PrivKeyEntry.
 """
 
-from PyQt4.QtGui import QDialog
-from PyQt4.QtCore import pyqtSignature, QObject
+from PyQt5.QtWidgets import QDialog
+from PyQt5.QtCore import pyqtSlot, QObject
 
-from Ui_privkeyentry import Ui_PrivKeyEntry
+from .Ui_privkeyentry import Ui_PrivKeyEntry
 
 class PrivKeyMapper(QObject):
     def __init__(self, passphrase, parent = None):

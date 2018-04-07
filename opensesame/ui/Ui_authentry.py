@@ -1,76 +1,66 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'C:\Users\rob\projects\JFX-OpenVPN-Client\ui\authentry.ui'
+# Form implementation generated from reading ui file 'authentry.ui'
 #
-# Created: Thu Oct 15 15:24:01 2009
-#      by: PyQt4 UI code generator 4.5.4
+# Created by: PyQt5 UI code generator 5.10.1
 #
 # WARNING! All changes made in this file will be lost!
 
-from PyQt4 import QtCore, QtGui
+from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_AuthEntry(object):
     def setupUi(self, AuthEntry):
         AuthEntry.setObjectName("AuthEntry")
         AuthEntry.resize(400, 203)
-        self.buttonBox = QtGui.QDialogButtonBox(AuthEntry)
+        self.buttonBox = QtWidgets.QDialogButtonBox(AuthEntry)
         self.buttonBox.setGeometry(QtCore.QRect(40, 160, 341, 32))
         self.buttonBox.setOrientation(QtCore.Qt.Horizontal)
-        self.buttonBox.setStandardButtons(QtGui.QDialogButtonBox.Cancel|QtGui.QDialogButtonBox.Ok)
+        self.buttonBox.setStandardButtons(QtWidgets.QDialogButtonBox.Cancel|QtWidgets.QDialogButtonBox.Ok)
         self.buttonBox.setObjectName("buttonBox")
-        self.verticalLayoutWidget = QtGui.QWidget(AuthEntry)
+        self.verticalLayoutWidget = QtWidgets.QWidget(AuthEntry)
         self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 401, 142))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
-        self.verticalLayout = QtGui.QVBoxLayout(self.verticalLayoutWidget)
+        self.verticalLayout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.verticalLayout.setContentsMargins(20, 10, 20, 10)
         self.verticalLayout.setObjectName("verticalLayout")
-        self.labelUsername = QtGui.QLabel(self.verticalLayoutWidget)
+        self.labelUsername = QtWidgets.QLabel(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.labelUsername.setFont(font)
         self.labelUsername.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.labelUsername.setObjectName("labelUsername")
         self.verticalLayout.addWidget(self.labelUsername)
-        self.lineEditUsername = QtGui.QLineEdit(self.verticalLayoutWidget)
-        self.lineEditUsername.setEchoMode(QtGui.QLineEdit.Normal)
+        self.lineEditUsername = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.lineEditUsername.setEchoMode(QtWidgets.QLineEdit.Normal)
         self.lineEditUsername.setObjectName("lineEditUsername")
         self.verticalLayout.addWidget(self.lineEditUsername)
-        self.labelPassword = QtGui.QLabel(self.verticalLayoutWidget)
+        self.labelPassword = QtWidgets.QLabel(self.verticalLayoutWidget)
         font = QtGui.QFont()
         font.setPointSize(12)
         self.labelPassword.setFont(font)
         self.labelPassword.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignVCenter)
         self.labelPassword.setObjectName("labelPassword")
         self.verticalLayout.addWidget(self.labelPassword)
-        self.lineEditPassword = QtGui.QLineEdit(self.verticalLayoutWidget)
-        self.lineEditPassword.setEchoMode(QtGui.QLineEdit.Password)
+        self.lineEditPassword = QtWidgets.QLineEdit(self.verticalLayoutWidget)
+        self.lineEditPassword.setEchoMode(QtWidgets.QLineEdit.Password)
         self.lineEditPassword.setObjectName("lineEditPassword")
         self.verticalLayout.addWidget(self.lineEditPassword)
-        self.checkBoxRemember = QtGui.QCheckBox(AuthEntry)
+        self.checkBoxRemember = QtWidgets.QCheckBox(AuthEntry)
         self.checkBoxRemember.setGeometry(QtCore.QRect(10, 150, 361, 18))
         self.checkBoxRemember.setObjectName("checkBoxRemember")
 
         self.retranslateUi(AuthEntry)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("accepted()"), AuthEntry.accept)
-        QtCore.QObject.connect(self.buttonBox, QtCore.SIGNAL("rejected()"), AuthEntry.reject)
+        self.buttonBox.accepted.connect(AuthEntry.accept)
+        self.buttonBox.rejected.connect(AuthEntry.reject)
         QtCore.QMetaObject.connectSlotsByName(AuthEntry)
         AuthEntry.setTabOrder(self.lineEditUsername, self.lineEditPassword)
         AuthEntry.setTabOrder(self.lineEditPassword, self.checkBoxRemember)
         AuthEntry.setTabOrder(self.checkBoxRemember, self.buttonBox)
 
     def retranslateUi(self, AuthEntry):
-        AuthEntry.setWindowTitle(QtGui.QApplication.translate("AuthEntry", "Enter Authorization Info", None, QtGui.QApplication.UnicodeUTF8))
-        self.labelUsername.setText(QtGui.QApplication.translate("AuthEntry", "Username", None, QtGui.QApplication.UnicodeUTF8))
-        self.labelPassword.setText(QtGui.QApplication.translate("AuthEntry", "Password", None, QtGui.QApplication.UnicodeUTF8))
-        self.checkBoxRemember.setText(QtGui.QApplication.translate("AuthEntry", "Remember for rest of session", None, QtGui.QApplication.UnicodeUTF8))
-
-
-if __name__ == "__main__":
-    import sys
-    app = QtGui.QApplication(sys.argv)
-    AuthEntry = QtGui.QDialog()
-    ui = Ui_AuthEntry()
-    ui.setupUi(AuthEntry)
-    AuthEntry.show()
-    sys.exit(app.exec_())
+        _translate = QtCore.QCoreApplication.translate
+        AuthEntry.setWindowTitle(_translate("AuthEntry", "Enter Authorization Info"))
+        self.labelUsername.setText(_translate("AuthEntry", "Username"))
+        self.labelPassword.setText(_translate("AuthEntry", "Password"))
+        self.checkBoxRemember.setText(_translate("AuthEntry", "Remember for rest of session"))
 

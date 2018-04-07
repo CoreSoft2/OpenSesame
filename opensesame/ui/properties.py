@@ -9,14 +9,14 @@
 Module implementing Properties.
 """
 
-from PyQt4 import QtGui
-from PyQt4 import QtCore
+from PyQt5 import QtWidgets
+from PyQt5 import QtCore
 
-from Ui_properties import Ui_Properties
+from .Ui_properties import Ui_Properties
 
 import os.path
 
-class Properties(QtGui.QDialog, Ui_Properties):
+class Properties(QtWidgets.QDialog, Ui_Properties):
     """
     Class documentation goes here.
     """
@@ -25,7 +25,7 @@ class Properties(QtGui.QDialog, Ui_Properties):
         """
         Constructor
         """
-        QtGui.QDialog.__init__(self, parent)
+        QtWidgets.QDialog.__init__(self, parent)
         self.config = config
         self._defaultfolder = self.config.defFileLoc
         self.setupUi(self)
@@ -159,7 +159,7 @@ class Properties(QtGui.QDialog, Ui_Properties):
         if rv:
             self.configok.emit()
         
-    @QtCore.pyqtSignature("bool")
+    @QtCore.pyqtSlot("bool")
     def on_checkBoxPort_toggled(self, checked):
         """
         Enable/Disable use of a custom port
@@ -175,17 +175,17 @@ class Properties(QtGui.QDialog, Ui_Properties):
     def disableCustomPort(self):
         self.lineEditPort.setDisabled(True)
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_toolButtonUserCert_clicked(self):
         """
         Slot documentation goes here.
         """
-        options = QtGui.QFileDialog.Options()
-        selectedFilter = QtCore.QString()
+        options = QtWidgets.QFileDialog.Options()
+        selectedFilter = ''
         file = self.lineEditUserCert.text()
         if file == '':
             file = self._defaultfolder
-        fileName = QtGui.QFileDialog.getOpenFileName(self,
+        fileName = QtWidgets.QFileDialog.getOpenFileName(self,
                 self.tr("Find user certificate ..."),
                 file,
                 self.tr("CRT Files (*.crt)"), selectedFilter,
@@ -194,17 +194,17 @@ class Properties(QtGui.QDialog, Ui_Properties):
             self.lineEditUserCert.setText(fileName)
             self._defaultfolder = os.path.dirname(str(fileName))
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_toolButtonCACert_clicked(self):
         """
         Slot documentation goes here.
         """
-        options = QtGui.QFileDialog.Options()
-        selectedFilter = QtCore.QString()
+        options = QtWidgets.QFileDialog.Options()
+        selectedFilter = ''
         file = self.lineEditCACert.text()
         if file == '':
             file = self._defaultfolder
-        fileName = QtGui.QFileDialog.getOpenFileName(self,
+        fileName = QtWidgets.QFileDialog.getOpenFileName(self,
                 self.tr("Find CA certificate ..."),
                 file,
                 self.tr("CRT Files (*.crt)"), selectedFilter,
@@ -213,17 +213,17 @@ class Properties(QtGui.QDialog, Ui_Properties):
             self.lineEditCACert.setText(fileName)
             self._defaultfolder = os.path.dirname(str(fileName))
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_toolButtonPrivKey_clicked(self):
         """
         Slot documentation goes here.
         """
-        options = QtGui.QFileDialog.Options()
-        selectedFilter = QtCore.QString()
+        options = QtWidgets.QFileDialog.Options()
+        selectedFilter = ''
         file = self.lineEditPrivKey.text()
         if file == '':
             file = self._defaultfolder
-        fileName = QtGui.QFileDialog.getOpenFileName(self,
+        fileName = QtWidgets.QFileDialog.getOpenFileName(self,
                 self.tr("Find private key ..."),
                 file,
                 self.tr("KEY Files (*.key)"), selectedFilter,
@@ -232,7 +232,7 @@ class Properties(QtGui.QDialog, Ui_Properties):
             self.lineEditPrivKey.setText(fileName)
             self._defaultfolder = os.path.dirname(str(fileName))
     
-    @QtCore.pyqtSignature("bool")
+    @QtCore.pyqtSlot("bool")
     def on_checkBoxUseTLSAuth_toggled(self, checked):
         """
         Enable/Disable the TLS Auth options
@@ -252,17 +252,17 @@ class Properties(QtGui.QDialog, Ui_Properties):
         self.toolButtonTLSAuth.setDisabled(True)
         self.comboBoxKeyDirection.setDisabled(True)
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_toolButtonTLSAuth_clicked(self):
         """
         Slot documentation goes here.
         """
-        options = QtGui.QFileDialog.Options()
-        selectedFilter = QtCore.QString()
+        options = QtWidgets.QFileDialog.Options()
+        selectedFilter = ''
         file = self.lineEditTLSAuth.text()
         if file == '':
             file = self._defaultfolder
-        fileName = QtGui.QFileDialog.getOpenFileName(self,
+        fileName = QtWidgets.QFileDialog.getOpenFileName(self,
                 self.tr("Find ta.key ..."),
                 file,
                 self.tr("(ta.key);;KEY Files (*.key)"), selectedFilter,
@@ -271,14 +271,14 @@ class Properties(QtGui.QDialog, Ui_Properties):
             self.lineEditTLSAuth.setText(fileName)
             self._defaultfolder = os.path.dirname(str(fileName))
             
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_toolButtonAddCF_clicked(self):
         """
         Add a custom field.
         """
         self.tableCustomFields.addCustomField()
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_toolButtonRemoveCF_clicked(self):
         """
         Remove custom field.

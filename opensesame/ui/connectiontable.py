@@ -6,7 +6,7 @@
 # See the README.TXT file for important information about this project.
 
 
-from PyQt4.QtGui import QTableWidget, QTableWidgetItem
+from PyQt5.QtWidgets import QTableWidget, QTableWidgetItem
 
 class ConnectionTable(QTableWidget):
     def __init__(self, parent=None):

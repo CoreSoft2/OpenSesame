@@ -1,4 +1,4 @@
-# OVPN/__init__.py
+# opensesame/__init__.py
 # OpenSesame
 
 # This file is part of the OpenSesame. 

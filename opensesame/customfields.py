@@ -1,4 +1,4 @@
-# OVPN/customfields.py
+# opensesame/customfields.py
 # OpenSesame
 
 # This file is part of OpenSesame. 

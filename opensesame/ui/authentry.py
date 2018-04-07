@@ -4,10 +4,10 @@
 Module implementing AuthEntry.
 """
 
-from PyQt4.QtGui import QDialog
-from PyQt4.QtCore import pyqtSignature, QObject
+from PyQt5.QtWidgets import QDialog
+from PyQt5.QtCore import pyqtSlot, QObject
 
-from Ui_authentry import Ui_AuthEntry
+from .Ui_authentry import Ui_AuthEntry
 
 class AuthMapper(QObject):
     def __init__(self, username, password, parent = None):

@@ -1,20 +1,19 @@
-# OVPN/clientmgr.py
+# opensesame/clientmgr.py
 # OpenSesame
 
 # This file is part of the OpenSesame. 
 # Copyright (C) 2009 by Rob Lemley.
 # See the README.TXT file for important information about this project.
 
-from PyQt4.QtCore import QString, QThread, QProcess, QVariant, SIGNAL, pyqtSignal, pyqtSlot
-from Queue import Queue
-import random
+from PyQt5.QtCore import QThread, QProcess, QVariant, pyqtSignal, pyqtSlot
+from queue import Queue
 
 
-import config
-import vpnmgmt
+from . import config
+from . import vpnmgmt
 
 
-exelocation = config.settings.value('EXELocation', QVariant(config.defPlatformEXE)).toString()
+exelocation = config.settings.value('EXELocation', QVariant(config.defPlatformEXE))
 
 class ClientConn(QThread):
     logready = pyqtSignal(str, str)
@@ -91,7 +90,7 @@ class ClientManager(QThread):
     alldone = pyqtSignal()
     managerfinished = pyqtSignal()
     closeclient = pyqtSignal()
-    logqueueready = pyqtSignal(str, "Queue")
+    logqueueready = pyqtSignal()
     posterror = pyqtSignal(str)
     changeConnState = pyqtSignal(str, str)
     getPrivKeyPass = pyqtSignal(str)

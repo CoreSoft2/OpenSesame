@@ -10,13 +10,13 @@ Module implementing Settings.
 """
 
 import os
-from PyQt4 import QtGui
-from PyQt4 import QtCore
+from PyQt5 import QtWidgets
+from PyQt5 import QtCore
 
-from Ui_appsettings import Ui_AppSettings
-from OVPN import exception
+from .Ui_appsettings import Ui_AppSettings
+from .. import exception
 
-class AppSettings(QtGui.QDialog, Ui_AppSettings):
+class AppSettings(QtWidgets.QDialog, Ui_AppSettings):
     """
     Class documentation goes here.
     """
@@ -24,7 +24,7 @@ class AppSettings(QtGui.QDialog, Ui_AppSettings):
         """
         Constructor
         """
-        QtGui.QDialog.__init__(self, parent)
+        QtWidgets.QDialog.__init__(self, parent)
         
         self.setupUi(self)
         
@@ -32,21 +32,21 @@ class AppSettings(QtGui.QDialog, Ui_AppSettings):
         self.setTrayIconWarning(trayIconWarning)
         self.setMgmtPortBase(mgmtPortBase)
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_toolButtonOpenVPNEXE_clicked(self):
         """
         Slot documentation goes here.
         """
-        options = QtGui.QFileDialog.Options()
-        selectedFilter = QtCore.QString()
+        options = QtWidgets.QFileDialog.Options()
+        selectedFilter = ''
         if self.parent().config.platform == 'win32':
-            fileName = QtGui.QFileDialog.getOpenFileName(self,
+            fileName = QtWidgets.QFileDialog.getOpenFileName(self,
                     self.tr("Find openvpn.exe ..."),
                     self.lineEditOpenVPNEXE.text(),
                     self.tr("(openvpn.exe);;EXE Files (*.exe)"), selectedFilter,
                     options)
         elif self.parent().config.platform == 'linux2':
-            fileName = QtGui.QFileDialog.getOpenFileName(self,
+            fileName = QtWidgets.QFileDialog.getOpenFileName(self,
                     self.tr("Find application ..."),
                     self.lineEditOpenVPNEXE.text(),
                     self.tr("(openvpn);;All files(*)"), selectedFilter,
@@ -74,7 +74,7 @@ class AppSettings(QtGui.QDialog, Ui_AppSettings):
     def mgmtPortBase(self):
         return self.lineEditManagementBasePort.text()
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_lineEditManagementBasePort_editingFinished(self):
         mgmtPortBase = self.mgmtPortBase()
         ckval = mgmtPortBase.toInt()

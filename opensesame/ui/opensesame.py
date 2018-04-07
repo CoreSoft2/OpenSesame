@@ -1,4 +1,4 @@
-# ui/openvpnclient.py
+# ui/opensesame.py
 # OpenSesame
 
 # This file is part of OpenSesame. 
@@ -9,22 +9,19 @@
 Module implementing MainWindow.
 """
 
-from PyQt4 import QtGui
-from PyQt4 import QtCore
+from PyQt5 import QtWidgets, QtCore, QtGui
 
-from Ui_openvpnclient import Ui_MainWindow
+from .. import config, clientmgr, exception
 
-from appsettings import AppSettings
-from properties import Properties
-from logging import LogMapper
-from privkeyentry import PrivKeyEntry, PrivKeyMapper
-from authentry import AuthEntry, AuthMapper
+from .Ui_opensesame import Ui_MainWindow
+from .appsettings import AppSettings
+from .properties import Properties
+from .logging import LogMapper
+from .privkeyentry import PrivKeyEntry, PrivKeyMapper
+from .authentry import AuthEntry, AuthMapper
 
-import sys, os.path
 
-from OVPN import config, clientmgr, exception
- 
-class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
+class MainWindow(QtWidgets.QMainWindow, Ui_MainWindow):
     """
     Class documentation goes here.
     """
@@ -38,13 +35,13 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         """
         Constructor
         """
-        QtGui.QMainWindow.__init__(self, parent)
+        QtWidgets.QMainWindow.__init__(self, parent)
         self.setupUi(self)
         
         self.settings = config.settings
         
         self.createTrayIcon()
-        showTrayWarning = self.settings.value('showTrayWarning', QtCore.QVariant(config.DEFAULTS['showTrayWarning'])).toBool()
+        showTrayWarning = self.settings.value('showTrayWarning', QtCore.QVariant(config.DEFAULTS['showTrayWarning']))
         self.showTrayWarning = showTrayWarning
         
         self.logmaps = {}
@@ -75,18 +72,18 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             event.accept()
     
     def createTrayIcon(self):
-        self.minimizeAction = QtGui.QAction("Minimize", self)
+        self.minimizeAction = QtWidgets.QAction("Minimize", self)
         self.minimizeAction.triggered.connect(self.hide)
-        self.restoreAction = QtGui.QAction("Restore", self)
+        self.restoreAction = QtWidgets.QAction("Restore", self)
         self.restoreAction.triggered.connect(self.showNormal)
         
-        self.trayIconMenu = QtGui.QMenu(self)
+        self.trayIconMenu = QtWidgets.QMenu(self)
         self.trayIconMenu.addAction(self.minimizeAction)
         self.trayIconMenu.addAction(self.restoreAction)
         self.trayIconMenu.addSeparator()
         self.trayIconMenu.addAction(self.actionExit)
 
-        self.trayIcon = QtGui.QSystemTrayIcon(self)
+        self.trayIcon = QtWidgets.QSystemTrayIcon(self)
         self.trayIcon.setContextMenu(self.trayIconMenu)
         
         self.disconnectedIcon = QtGui.QIcon()
@@ -159,12 +156,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         else:
             privKeyPass = PrivKeyEntry(parent=self)
             rv = privKeyPass.exec_()
-            if rv == QtGui.QDialog.Accepted:
+            if rv == QtWidgets.QDialog.Accepted:
                 privkey = str(privKeyPass.lineEditPrivKey.text())
                 if privKeyPass.checkBoxRemember.isChecked():
                     self.rememberedPrivKeys[name] = PrivKeyMapper(privkey)
                 self.sendPrivKey.emit(name, privkey)
-            elif rv == QtGui.QDialog.Rejected:
+            elif rv == QtWidgets.QDialog.Rejected:
                 self.closeconnection.emit(name)
     
     @QtCore.pyqtSlot()
@@ -175,13 +172,13 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         else:
             UserPass = AuthEntry(parent=self)
             rv = UserPass.exec_()
-            if rv == QtGui.QDialog.Accepted:
+            if rv == QtWidgets.QDialog.Accepted:
                 username = str(UserPass.lineEditUsername.text())
                 password = str(UserPass.lineEditPassword.text())
                 if UserPass.checkBoxRemember.isChecked():
                     self.rememberedAuths[name] = AuthMapper(username, password)
                 self.sendUserPass.emit(name, username, password)
-            elif rv == QtGui.QDialog.Rejected:
+            elif rv == QtWidgets.QDialog.Rejected:
                 self.closeconnection.emit(name)
         
     def loadconnections(self):
@@ -200,7 +197,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.tableConnections.editRow(key, ovconfig)
         
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionExit_triggered(self):
         """
         Slot documentation goes here.
@@ -224,7 +221,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         self.manager = None
         self.close()
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionNew_triggered(self):
         """
         Create a new config
@@ -238,7 +235,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             settingkey = 'connections/%s' % ovconfig.getname()
             self.settings.setValue(settingkey, QtCore.QVariant(filename))
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionProperties_triggered(self):
         """
         Slot documentation goes here.
@@ -259,7 +256,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 settingkey = 'connections/%s' % ovconfig.getname()
                 self.settings.setValue(settingkey, QtCore.QVariant(filename))
 
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionDelete_triggered(self):
         """
         Slot documentation goes here.
@@ -271,7 +268,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
                 self.tableConnections.removeRow(key)
             
         
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionConnect_triggered(self):
         """
         Slot documentation goes here.
@@ -306,7 +303,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         
         self.tableConnections.setState(name, "Connecting")
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionDisconnect_triggered(self):
         """
         Slot documentation goes here.
@@ -317,7 +314,7 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
             name = ovconfig.getname()
             self.closeconnection.emit(name)
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionLogging_triggered(self):
         """
         Slot documentation goes here.
@@ -338,12 +335,12 @@ class MainWindow(QtGui.QMainWindow, Ui_MainWindow):
         name = str(name)
         self.logmaps[name].getLog()
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionAbout_triggered(self):
         """
         Call about dialog
         """
-        QtGui.QMessageBox.about(None,
+        QtWidgets.QMessageBox.about(None,
             self.trUtf8("About OpenSesame - Version %s" % config.VERSION),
             self.trUtf8("""Copyright (C) 2009 by Rob Lemley
 
@@ -352,7 +349,7 @@ OpenSesame is distributed under the terms of the GPL license version 3. See lice
 For license terms for OpenVPN and its components, see openvpn-license.txt."""))
 
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionSettings_triggered(self):
         """
         Open the app settings dialog.
@@ -376,7 +373,7 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
             self.settings.setValue('ManagementBasePort', QtCore.QVariant(mgmtPortBase))
             
     
-    @QtCore.pyqtSignature("QModelIndex")
+    @QtCore.pyqtSlot("QModelIndex")
     def on_tableConnections_doubleClicked(self, index):
         """
         double-click on a connection row
@@ -385,7 +382,7 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         if row >= 0:
             self.doProperties(row)
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionForget_Password_triggered(self):
         """
         Slot documentation goes here.
@@ -396,23 +393,23 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         self.rememberedAuths = {}
         exception.MsgBox("Passwords forgotten.")
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionAbout_Qt_triggered(self):
         """
         Slot documentation goes here.
         """
-        QtGui.QMessageBox.aboutQt(None, 
+        QtWidgets.QMessageBox.aboutQt(None, 
             self.trUtf8("About Qt..."))
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionImport_triggered(self):
         """
         Import a config.
         """
-        options = QtGui.QFileDialog.Options()
-        selectedFilter = QtCore.QString()
+        options = QtWidgets.QFileDialog.Options()
+        selectedFilter = ''
         homeDir = QtCore.QDir.homePath()
-        fileName = QtGui.QFileDialog.getOpenFileName(self,
+        fileName = QtWidgets.QFileDialog.getOpenFileName(self,
                 self.tr("Import VPN Configuration"),
                 homeDir,
                 self.tr("VPN Config Exports (*.ovpnz);;All Files (*)"), selectedFilter,
@@ -434,7 +431,7 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         
         
     
-    @QtCore.pyqtSignature("")
+    @QtCore.pyqtSlot()
     def on_actionExport_triggered(self):
         """
         Export a config file for transfer to another computer.
@@ -443,10 +440,10 @@ For license terms for OpenVPN and its components, see openvpn-license.txt."""))
         if key >= 0:
             ovconfig = self.tableConnections.configs[key]
             
-            options = QtGui.QFileDialog.Options()
-            selectedFilter = QtCore.QString()
+            options = QtWidgets.QFileDialog.Options()
+            selectedFilter = ''
             homeDir = QtCore.QDir.homePath()
-            fileName = QtGui.QFileDialog.getSaveFileName(self,
+            fileName = QtWidgets.QFileDialog.getSaveFileName(self,
                 self.tr("Export VPN Configuration"),
                 homeDir,
                 self.tr("VPN Config Exports (*.ovpnz);;All Files (*)"), selectedFilter,

@@ -1,4 +1,4 @@
-# OVPN/exception.py
+# opensesame/exception.py
 # OpenSesame
 
 # This file is part of OpenSesame. 
@@ -12,7 +12,7 @@ import sys
 import os.path
 import traceback
 
-from PyQt4.QtGui import QMessageBox
+from PyQt5.QtWidgets import QMessageBox
 
 def ConfigErrorMsg(error):
     message = str(error)

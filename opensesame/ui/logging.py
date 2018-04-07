@@ -10,10 +10,10 @@
 Module implementing Log.
 """
 
-from PyQt4 import QtGui
-from PyQt4 import QtCore
+from PyQt5 import QtWidgets
+from PyQt5 import QtCore
 
-from Ui_logging import Ui_Log
+from .Ui_logging import Ui_Log
 
 class LogMapper(QtCore.QObject):
     def __init__(self, queue, name, parent):
@@ -50,7 +50,7 @@ class LogMapper(QtCore.QObject):
         self.Q = queue
         
 
-class Log(QtGui.QDialog, Ui_Log):
+class Log(QtWidgets.QDialog, Ui_Log):
     """
     Class documentation goes here.
     """

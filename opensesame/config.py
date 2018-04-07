@@ -1,4 +1,4 @@
-# OVPN/config.py
+# opensesame/config.py
 # OpenSesame
 
 # This file is part of OpenSesame. 
@@ -15,10 +15,10 @@ import shutil
 import zipfile
 import tempfile
 
-from PyQt4.QtCore import QSettings
+from PyQt5.QtCore import QSettings
 
-from exception import ConfigErrorMsg, QuestionMsgBox, YesNoMsgBox
-from customfields import ALLOWEDCFS
+from .exception import ConfigErrorMsg, QuestionMsgBox, YesNoMsgBox
+from .customfields import ALLOWEDCFS
 
 APPNAME = 'OpenSesame'
 VERSION = 'trunk'
@@ -43,7 +43,7 @@ platform=sys.platform
 if platform == 'win32':
     defPlatformEXE = DEFAULTS['exelocation']
     defFileLoc = DEFAULTS['windeffileloc']
-elif platform == 'linux2':
+elif platform == 'linux':
     defPlatformEXE = DEFAULTS['linuxbinary']
     defFileLoc = DEFAULTS['linuxdeffileloc']
 else:
@@ -109,7 +109,7 @@ class ConfigDesc:
     def _hostport(self, value):
         try:
             host, port = value.split(' ',1)
-        except ValueError, AttributeError:
+        except (ValueError, AttributeError):
             return False
         
         hostparts = host.split('.')
@@ -146,7 +146,7 @@ class ConfigDesc:
     def _tlsauth(self, value):
         try:
             file, direction = value.rsplit(' ', 1)
-        except ValueError, AttributeError:
+        except (ValueError, AttributeError):
             return False
         if not self._file(file):
             return False
