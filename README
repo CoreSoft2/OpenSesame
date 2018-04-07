@@ -1,4 +1,25 @@
-README.TXT  - 2009-09-08
+# UPDATE UPDATE UPDATE UPDATE
+
+## 2018-04-06
+
+April 2015 - After almost 7 year's I'm reviving this project. The short
+version is that I have a need to connect a Windows box to an OpenVPN
+service, and I still don't like the one from OpenVPN.
+
+Change-wise, first up is to revert the PySide changes. Last I checked,
+PySide development is lagging, so for now I suspect it's best to just
+stick with PyQt. I may refactor again to support one of the PyQt/PySide
+compatibility libraries that have popped up recently, but we'll see.
+
+There's now a "dev" branch. All development will take place there. I'll
+keep "master" as a stable branch, though honestly it may not even work.
+
+Platform support: I only plan to support Windows; that's my use case.
+NetworkManager on Linux works for me, and I don't use MacOS. But it's
+Qt, so supporting Linux or Mac shouldn't be too bad if someone else 
+wants to put the effort into it.
+
+
 
 This is OpenSesame. 
 
